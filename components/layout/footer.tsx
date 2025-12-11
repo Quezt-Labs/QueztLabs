@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { company, navigation } from "@/lib/data"
-import { Twitter, Linkedin, Github, Dribbble } from "lucide-react"
+import Link from "next/link";
+import { company, navigation } from "@/lib/data";
+import { Twitter, Linkedin, Github, Dribbble } from "lucide-react";
 
 /**
  * Site footer with navigation links and social icons
@@ -16,12 +16,14 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-primary-foreground flex items-center justify-center">
                 <span className="text-primary font-bold text-sm">N</span>
               </div>
-              <span className="font-bold text-lg tracking-tight">{company.name}</span>
+              <span className="font-bold text-lg tracking-tight">
+                {company.name}
+              </span>
             </Link>
             <p className="mt-4 text-sm text-primary-foreground/70 max-w-xs leading-relaxed">
-              {company.tagline}. Crafting exceptional digital experiences since 2016.
+              {company.tagline}. Crafting exceptional digital experiences
             </p>
-            <div className="flex gap-4 mt-6">
+            {/* <div className="flex gap-4 mt-6">
               <a
                 href={company.social.twitter}
                 target="_blank"
@@ -58,13 +60,15 @@ export function Footer() {
               >
                 <Dribbble className="w-5 h-5" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Navigation Links */}
           {navigation.footer.map((group) => (
             <div key={group.title}>
-              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">{group.title}</h3>
+              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+                {group.title}
+              </h3>
               <ul className="space-y-3">
                 {group.links.map((link) => (
                   <li key={link.name}>
@@ -85,9 +89,11 @@ export function Footer() {
           <p className="text-sm text-primary-foreground/70">
             © {new Date().getFullYear()} {company.name}. All rights reserved.
           </p>
-          <p className="text-sm text-primary-foreground/70">Crafted with care in San Francisco</p>
+          <p className="text-sm text-primary-foreground/70">
+            Crafted with care in India
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

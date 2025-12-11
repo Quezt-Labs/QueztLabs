@@ -18,15 +18,15 @@
 export const company = {
   name: "Quezt Labs",
   tagline: "We build digital products that matter",
-  email: "hello@queztlabs.dev",
-  phone: "+1 (555) 123-4567",
-  address: "123 Innovation Drive, San Francisco, CA 94107",
-  social: {
+  email: "hello@queztlabs.tech",
+  /*  phone: "+1 (555) 123-4567", */
+  address: "Delhi, India",
+  /* social: {
     twitter: "https://twitter.com/queztlabs",
     linkedin: "https://linkedin.com/company/queztlabs",
     github: "https://github.com/queztlabs",
     dribbble: "https://dribbble.com/queztlabs",
-  },
+  }, */
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -60,13 +60,13 @@ export const navigation = {
         { name: "Contact", href: "#contact" },
       ],
     },
-    {
+    /* {
       title: "Legal",
       links: [
         { name: "Privacy Policy", href: "/privacy" },
         { name: "Terms of Service", href: "/terms" },
       ],
-    },
+    }, */
   ],
 };
 

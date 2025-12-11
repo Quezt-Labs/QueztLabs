@@ -2,13 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Code, Zap, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { clientLogos } from "@/lib/data";
 
 /**
- * Hero section with animated headline, CTAs, and client logos
+ * Hero section with animated headline, CTAs, and key features
  */
 export function Hero() {
   return (
@@ -66,31 +64,77 @@ export function Hero() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="#portfolio">View Our Work</Link>
+              <Link href="#services">Our Services</Link>
             </Button>
           </motion.div>
 
-          {/* Client Logos */}
+          {/* Key Features */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mt-20"
           >
-            <p className="text-sm text-muted-foreground mb-8">
-              Trusted by innovative teams worldwide
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12 opacity-60">
-              {clientLogos.map((client) => (
-                <Image
-                  key={client.name}
-                  src={client.logo || "/placeholder.svg"}
-                  alt={client.name}
-                  width={120}
-                  height={40}
-                  className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
-                />
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/30 flex items-center justify-center mb-3">
+                  <Code className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">Modern Stack</h3>
+                <p className="text-sm text-muted-foreground">
+                  Latest technologies
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/30 flex items-center justify-center mb-3">
+                  <Zap className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">Fast Delivery</h3>
+                <p className="text-sm text-muted-foreground">
+                  Agile development
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/30 flex items-center justify-center mb-3">
+                  <Shield className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">
+                  Secure & Reliable
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Production ready
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.9 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/30 flex items-center justify-center mb-3">
+                  <Sparkles className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">Quality First</h3>
+                <p className="text-sm text-muted-foreground">Best practices</p>
+              </motion.div>
             </div>
           </motion.div>
         </div>

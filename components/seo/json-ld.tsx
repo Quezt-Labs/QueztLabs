@@ -22,16 +22,16 @@ export function JsonLd() {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: company.phone,
+      /*  telephone: company.phone, */
       contactType: "sales",
       email: company.email,
     },
-    sameAs: [
+    /* sameAs: [
       company.social.twitter,
       company.social.linkedin,
       company.social.github,
       company.social.dribbble,
-    ],
+    ], */
   };
 
   const websiteSchema = {
