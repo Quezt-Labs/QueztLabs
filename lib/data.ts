@@ -35,10 +35,10 @@ export const company = {
 export const navigation = {
   main: [
     { name: "Services", href: "#services" },
-    { name: "Work", href: "#portfolio" },
+    /*  { name: "Work", href: "#portfolio" }, */
     { name: "Process", href: "#process" },
     { name: "Pricing", href: "#pricing" },
-    { name: "Blog", href: "/blog" },
+    /*  { name: "Blog", href: "/blog" }, */
     { name: "Contact", href: "#contact" },
   ],
   footer: [
@@ -55,8 +55,8 @@ export const navigation = {
       title: "Company",
       links: [
         { name: "About", href: "#about" },
-        { name: "Blog", href: "/blog" },
-        { name: "Careers", href: "#careers" },
+        /*  { name: "Blog", href: "/blog" }, */
+        /*  { name: "Careers", href: "#careers" }, */
         { name: "Contact", href: "#contact" },
       ],
     },
