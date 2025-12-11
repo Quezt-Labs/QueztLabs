@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ArrowUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /**
  * Back to top button that appears on scroll
  */
 export function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 500)
-    }
+      setIsVisible(window.scrollY > 500);
+    };
 
-    window.addEventListener("scroll", toggleVisibility)
-    return () => window.removeEventListener("scroll", toggleVisibility)
-  }, [])
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <AnimatePresence>
@@ -35,9 +35,9 @@ export function BackToTop() {
         >
           <Button
             size="icon"
-            variant="outline"
+            variant="default"
             onClick={scrollToTop}
-            className="rounded-full shadow-lg bg-transparent"
+            className="rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 border-2 border-primary/20"
             aria-label="Back to top"
           >
             <ArrowUp className="h-4 w-4" />
@@ -45,5 +45,5 @@ export function BackToTop() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
