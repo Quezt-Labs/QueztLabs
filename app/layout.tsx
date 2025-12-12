@@ -10,11 +10,12 @@ import "./globals.css";
  * - Playfair Display: Elegant serif for headings and emphasis
  * - Geist Mono: Monospace for code snippets
  */
-// Optimize font loading - use 'optional' for faster FCP, fallback to system fonts
+// Optimize font loading - use 'swap' for better LCP, fallback to system fonts
+// 'swap' shows text immediately with fallback, then swaps when font loads
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "optional", // Faster FCP - uses system font if font not ready
+  display: "swap", // Better for LCP - shows text immediately
   preload: true,
   fallback: [
     "system-ui",
@@ -24,6 +25,8 @@ const inter = Inter({
     "sans-serif",
   ],
   adjustFontFallback: true,
+  // Only load regular weight initially to reduce font file size
+  weight: ["400", "500", "600", "700"],
 });
 
 // Defer non-critical fonts - load after initial render
@@ -138,7 +141,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}
     >
       <head>
-        {/* Preconnect to Google Fonts for faster font loading */}
+        {/* Preconnect to Google Fonts - must be in head for proper detection */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -147,6 +150,20 @@ export default function RootLayout({
         />
         {/* DNS prefetch for analytics */}
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+        {/* Critical CSS inline to prevent render-blocking */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* Critical above-the-fold styles */
+              body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+              h1 { font-weight: 700; line-height: 1.2; margin: 0; }
+              .container { width: 100%; margin: 0 auto; padding: 0 1rem; }
+              .text-center { text-align: center; }
+              .flex { display: flex; }
+              .items-center { align-items: center; }
+            `,
+          }}
+        />
       </head>
       <body className="font-sans antialiased">
         {children}
