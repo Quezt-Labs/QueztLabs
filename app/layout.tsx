@@ -10,25 +10,39 @@ import "./globals.css";
  * - Playfair Display: Elegant serif for headings and emphasis
  * - Geist Mono: Monospace for code snippets
  */
+// Optimize font loading - use 'optional' for faster FCP, fallback to system fonts
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
+  display: "optional", // Faster FCP - uses system font if font not ready
   preload: true,
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "sans-serif",
+  ],
+  adjustFontFallback: true,
 });
 
+// Defer non-critical fonts - load after initial render
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-  display: "swap",
-  preload: false, // Only preload primary font
+  display: "optional", // Don't block render
+  preload: false,
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
-  display: "swap",
+  display: "optional",
   preload: false,
+  fallback: ["Menlo", "Monaco", "Courier New", "monospace"],
+  adjustFontFallback: true,
 });
 
 /**
@@ -102,10 +116,6 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   generator: "quezt-labs",
-  other: {
-    // Resource hints for performance
-    "dns-prefetch": "https://vitals.vercel-insights.com",
-  },
 };
 
 export const viewport: Viewport = {
@@ -127,6 +137,17 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}
     >
+      <head>
+        {/* Preconnect to Google Fonts for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* DNS prefetch for analytics */}
+        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+      </head>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

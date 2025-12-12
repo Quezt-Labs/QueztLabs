@@ -22,7 +22,11 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div className="max-w-4xl mx-auto text-center">
+        <div
+          className="max-w-4xl mx-auto text-center"
+          itemScope
+          itemType="https://schema.org/Organization"
+        >
           {/* Badge */}
           <motion.div
             initial={fadeIn}
@@ -38,7 +42,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline - LCP Element - Optimized for fast rendering */}
           <motion.h1
             initial={fadeIn}
             animate={animate}
@@ -48,6 +52,10 @@ export function Hero() {
                 : { duration: 0.5, delay: 0.1 }
             }
             className="mt-8 text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl text-balance"
+            style={{
+              // Prevent layout shift - reserve space
+              minHeight: "1.2em",
+            }}
           >
             We build digital products{" "}
             <span className="font-serif italic">that matter</span>
