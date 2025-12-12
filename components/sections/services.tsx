@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Smartphone, Globe, Palette, Lightbulb } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { services } from "@/lib/data";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const iconMap = {
   smartphone: Smartphone,
@@ -16,6 +17,8 @@ const iconMap = {
  * Services section showcasing core offerings
  */
 export function Services() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="services" className="py-20 lg:py-32 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,10 +34,18 @@ export function Services() {
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={
+                  shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
+                }
+                whileInView={
+                  shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+                }
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.5, delay: index * 0.1 }
+                }
                 className="group p-6 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors w-full max-w-sm"
               >
                 <div className="w-12 h-12 rounded-xl bg-accent/30 flex items-center justify-center mb-4 group-hover:bg-accent/50 transition-colors">

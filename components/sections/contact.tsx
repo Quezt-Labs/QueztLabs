@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeader } from "@/components/ui/section-header";
 import { company } from "@/lib/data";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
  * Contact section with form and company info
@@ -19,6 +20,7 @@ export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -71,10 +73,16 @@ export function Contact() {
         <div className="mt-16 grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: -20 }
+            }
+            whileInView={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }
+            }
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={
+              shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
+            }
           >
             <h3 className="text-2xl font-semibold mb-6">Get in touch</h3>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -127,10 +135,16 @@ export function Contact() {
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: 20 }
+            }
+            whileInView={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }
+            }
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={
+              shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
+            }
           >
             {isSubmitted ? (
               <div className="h-full flex items-center justify-center p-8 rounded-2xl bg-accent/20 border border-accent/30">

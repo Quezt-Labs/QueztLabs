@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Search, Target, Palette, Code, Rocket } from "lucide-react"
 import { SectionHeader } from "@/components/ui/section-header"
 import { processSteps } from "@/lib/data"
+import { useReducedMotion } from "@/hooks/use-reduced-motion"
 
 const iconMap = {
   Discovery: Search,
@@ -17,6 +18,8 @@ const iconMap = {
  * Process section showing the development workflow
  */
 export function Process() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section id="process" className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       {/* Background decoration */}
@@ -40,10 +43,10 @@ export function Process() {
             
             {/* Animated progress line */}
             <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
+              initial={shouldReduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
+              whileInView={shouldReduceMotion ? { scaleX: 1 } : { scaleX: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 2, ease: "easeInOut" }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 2, ease: "easeInOut" }}
               className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-foreground/40 to-transparent origin-left"
             />
 
@@ -53,20 +56,22 @@ export function Process() {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                  whileInView={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.2 + 0.5 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.2 + 0.5 }}
                   className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
                   style={{ left: `${position}%` }}
                 >
                   <div className="w-3 h-3 rounded-full bg-primary-foreground/40 border-2 border-primary-foreground/60 backdrop-blur-sm" />
                   {/* Pulse effect */}
-                  <motion.div
-                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                    className="absolute inset-0 -z-10 w-3 h-3 rounded-full bg-primary-foreground/20"
-                  />
+                  {!shouldReduceMotion && (
+                    <motion.div
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                      className="absolute inset-0 -z-10 w-3 h-3 rounded-full bg-primary-foreground/20"
+                    />
+                  )}
                 </motion.div>
               )
             })}
@@ -79,19 +84,19 @@ export function Process() {
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  whileInView={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.15 }}
                   className="relative group"
                 >
                   {/* Connection indicator on card top (desktop) */}
                   <div className="hidden lg:block absolute -top-6 left-1/2 -translate-x-1/2 z-20">
                     <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                      whileInView={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.2 + 0.3 }}
                       className="w-2 h-2 rounded-full bg-primary-foreground/60 border-2 border-primary-foreground/80"
                     />
                   </div>
@@ -102,17 +107,19 @@ export function Process() {
                   {/* Card */}
                   <div className="relative h-full bg-primary-foreground/5 backdrop-blur-xl border border-primary-foreground/10 rounded-2xl p-6 lg:p-5 transition-all duration-300 hover:bg-primary-foreground/10 hover:border-primary-foreground/30 hover:shadow-xl hover:shadow-primary-foreground/10 hover:-translate-y-1">
                     {/* Animated inner glow */}
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-foreground/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      animate={{
-                        backgroundPosition: ["0% 0%", "100% 100%"],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    />
+                    {!shouldReduceMotion && (
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-foreground/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        animate={{
+                          backgroundPosition: ["0% 0%", "100% 100%"],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        }}
+                      />
+                    )}
 
                     {/* Content */}
                     <div className="relative z-10">
@@ -120,15 +127,15 @@ export function Process() {
                       <div className="flex items-center justify-between mb-4">
                         <motion.span
                           className="text-4xl lg:text-5xl font-bold text-primary-foreground/20 group-hover:text-primary-foreground/30 transition-colors"
-                          whileHover={{ scale: 1.05 }}
+                          whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                         >
                           {step.number}
                         </motion.span>
                         {Icon && (
                           <motion.div
                             className="p-2.5 rounded-xl bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors"
-                            whileHover={{ rotate: 360 }}
-                            transition={{ duration: 0.6 }}
+                            whileHover={shouldReduceMotion ? {} : { rotate: 360 }}
+                            transition={shouldReduceMotion ? {} : { duration: 0.6 }}
                           >
                             <Icon className="w-5 h-5 text-primary-foreground" />
                           </motion.div>
@@ -152,10 +159,10 @@ export function Process() {
 
         {/* Bottom CTA hint */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
           className="mt-16 text-center"
         >
           <p className="text-sm text-primary-foreground/60">

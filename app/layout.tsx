@@ -13,16 +13,22 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+  preload: false, // Only preload primary font
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+  display: "swap",
+  preload: false,
 });
 
 /**
@@ -96,6 +102,10 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   generator: "quezt-labs",
+  other: {
+    // Resource hints for performance
+    "dns-prefetch": "https://vitals.vercel-insights.com",
+  },
 };
 
 export const viewport: Viewport = {

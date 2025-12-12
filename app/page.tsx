@@ -1,18 +1,59 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
-import { Services } from "@/components/sections/services";
-import { Portfolio } from "@/components/sections/portfolio";
-import { Stats } from "@/components/sections/stats";
-import { Process } from "@/components/sections/process";
-import { Testimonials } from "@/components/sections/testimonials";
-import { Pricing } from "@/components/sections/pricing";
-import { BlogTeaser } from "@/components/sections/blog-teaser";
-import { FAQ } from "@/components/sections/faq";
-import { Contact } from "@/components/sections/contact";
+import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
+
+// Lazy load below-the-fold components for better performance
+const Services = dynamic(
+  () =>
+    import("@/components/sections/services").then((mod) => ({
+      default: mod.Services,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32 bg-muted/50" />,
+  }
+);
+
+const Process = dynamic(
+  () =>
+    import("@/components/sections/process").then((mod) => ({
+      default: mod.Process,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
+const Pricing = dynamic(
+  () =>
+    import("@/components/sections/pricing").then((mod) => ({
+      default: mod.Pricing,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
+const FAQ = dynamic(
+  () =>
+    import("@/components/sections/faq").then((mod) => ({ default: mod.FAQ })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
+const Contact = dynamic(
+  () =>
+    import("@/components/sections/contact").then((mod) => ({
+      default: mod.Contact,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
 
 /**
  * Home Page

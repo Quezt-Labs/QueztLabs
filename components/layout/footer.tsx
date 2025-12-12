@@ -20,6 +20,7 @@ export function Footer() {
                 width={32}
                 height={32}
                 className="h-8 w-auto"
+                loading="lazy"
               />
               <span className="font-bold text-lg tracking-tight">
                 {company.name}

@@ -7,11 +7,14 @@ import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { pricingTiers } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
  * Pricing section with tiered options
  */
 export function Pricing() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section id="pricing" className="py-20 lg:py-32 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,10 +28,10 @@ export function Pricing() {
           {pricingTiers.map((tier, index) => (
             <motion.div
               key={tier.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
               className={cn(
                 "relative p-8 rounded-2xl border",
                 tier.highlighted
