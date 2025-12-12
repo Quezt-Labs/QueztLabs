@@ -11,8 +11,6 @@ const nextConfig = {
   },
   // Enable compression
   compress: true,
-  // Optimize fonts
-  optimizeFonts: true,
   // Modern browser support - reduce legacy JavaScript
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -21,8 +19,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
-  // Target modern browsers to reduce legacy JS
-  swcMinify: true,
+  // Set Turbopack root to silence warning about multiple lockfiles
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;
