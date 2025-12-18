@@ -10,10 +10,13 @@ export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand */}
-          <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2 mt-5">
+            <Link
+              href="/"
+              className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity"
+            >
               <Image
                 src="/logo.png"
                 alt={`${company.name} Logo`}
@@ -26,7 +29,7 @@ export function Footer() {
                 {company.name}
               </span>
             </Link>
-            <p className="mt-4 text-sm text-primary-foreground/70 max-w-xs leading-relaxed">
+            <p className="text-sm text-primary-foreground/70 max-w-xs leading-relaxed">
               {company.tagline}. Crafting exceptional digital experiences
             </p>
             {/* <div className="flex gap-4 mt-6">
@@ -71,8 +74,8 @@ export function Footer() {
 
           {/* Navigation Links */}
           {navigation.footer.map((group) => (
-            <div key={group.title}>
-              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+            <div key={group.title} className="space-y-4 mt-5">
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-primary-foreground">
                 {group.title}
               </h3>
               <ul className="space-y-3">
@@ -80,7 +83,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                      className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors inline-block hover:translate-x-1 duration-200"
                     >
                       {link.name}
                     </Link>
@@ -91,13 +94,15 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-primary-foreground/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-primary-foreground/70">
-            © {new Date().getFullYear()} {company.name}. All rights reserved.
-          </p>
-          <p className="text-sm text-primary-foreground/70">
-            Crafted with care in India
-          </p>
+        <div className="mt-12 pt-8 border-t border-primary-foreground/10 pb-5">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-primary-foreground/70 text-center sm:text-left">
+              © {new Date().getFullYear()} {company.name}. All rights reserved.
+            </p>
+            <p className="text-sm text-primary-foreground/70 text-center sm:text-right">
+              Crafted with care in India
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Smartphone, Globe, Palette, Lightbulb } from "lucide-react";
+import { Smartphone, Globe, Palette, Lightbulb, FileText } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { services } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -11,6 +11,7 @@ const iconMap = {
   globe: Globe,
   palette: Palette,
   lightbulb: Lightbulb,
+  filetext: FileText,
 };
 
 /**
@@ -28,7 +29,7 @@ export function Services() {
           description="From initial concept to launch and beyond, we provide end-to-end digital product development services."
         />
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto justify-items-center">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-items-center">
           {services.map((service, index) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap];
             return (
@@ -46,7 +47,7 @@ export function Services() {
                     ? { duration: 0 }
                     : { duration: 0.5, delay: index * 0.1 }
                 }
-                className="group p-6 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors w-full max-w-sm"
+                className="group p-6 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors w-full"
               >
                 <div className="w-12 h-12 rounded-xl bg-accent/30 flex items-center justify-center mb-4 group-hover:bg-accent/50 transition-colors">
                   <Icon className="w-6 h-6" />

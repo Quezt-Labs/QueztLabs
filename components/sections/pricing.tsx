@@ -14,24 +14,32 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
  */
 export function Pricing() {
   const shouldReduceMotion = useReducedMotion();
-  
+
   return (
     <section id="pricing" className="py-20 lg:py-32 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Pricing"
-          title="Transparent pricing for every stage"
-          description="Choose the engagement model that fits your project. All prices are starting points—we'll provide a detailed quote after understanding your needs."
+          title="Simple, transparent pricing that scales with you"
+          description="Start small, grow big. From MVPs to enterprise solutions, we have a plan that fits your budget and ambitions. No hidden fees, no surprises—just honest pricing."
         />
 
         <div className="mt-16 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {pricingTiers.map((tier, index) => (
             <motion.div
               key={tier.id}
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              initial={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
+              }
+              whileInView={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+              }
               viewport={{ once: true, margin: "-100px" }}
-              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.5, delay: index * 0.1 }
+              }
               className={cn(
                 "relative p-8 rounded-2xl border",
                 tier.highlighted
@@ -44,6 +52,7 @@ export function Pricing() {
                   Most Popular
                 </span>
               )}
+
               <h3 className="text-xl font-semibold">{tier.name}</h3>
               <p
                 className={cn(
@@ -57,11 +66,7 @@ export function Pricing() {
               </p>
               <div className="mt-6">
                 <span className="text-4xl font-bold">
-                  {tier.price === "Custom"
-                    ? tier.price
-                    : tier.price.includes("₹")
-                    ? tier.price
-                    : `$${tier.price}`}
+                  {tier.price === "Custom" ? tier.price : `$${tier.price}`}
                 </span>
                 <span
                   className={cn(

@@ -45,6 +45,16 @@ const FAQ = dynamic(
   }
 );
 
+const Support = dynamic(
+  () =>
+    import("@/components/sections/support").then((mod) => ({
+      default: mod.Support,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
 const Contact = dynamic(
   () =>
     import("@/components/sections/contact").then((mod) => ({
@@ -87,6 +97,7 @@ export default function HomePage() {
         <Process />
         {/*  <Testimonials /> */}
         <Pricing />
+        <Support />
         {/* <BlogTeaser /> */}
         <FAQ />
         <Contact />
