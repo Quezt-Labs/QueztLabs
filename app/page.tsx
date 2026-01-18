@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
+import { WhyQueztLabs } from "@/components/sections/why-queztlabs";
 import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -65,6 +66,26 @@ const Contact = dynamic(
   }
 );
 
+const About = dynamic(
+  () =>
+    import("@/components/sections/about").then((mod) => ({
+      default: mod.About,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
+const MVPSprint = dynamic(
+  () =>
+    import("@/components/sections/mvp-sprint").then((mod) => ({
+      default: mod.MVPSprint,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
 /**
  * Home Page
  *
@@ -91,14 +112,13 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <WhyQueztLabs />
         <Services />
-        {/* <Portfolio /> */}
-        {/* <Stats /> */}
+        <MVPSprint />
         <Process />
-        {/*  <Testimonials /> */}
+        <About />
         <Pricing />
         <Support />
-        {/* <BlogTeaser /> */}
         <FAQ />
         <Contact />
       </main>

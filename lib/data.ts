@@ -45,29 +45,31 @@ export const navigation = {
     {
       title: "Services",
       links: [
+        { name: "MVP Development", href: "#services" },
+        { name: "Web Applications", href: "#services" },
         { name: "Mobile Apps", href: "#services" },
-        { name: "Web Development", href: "#services" },
-        { name: "UI/UX Design", href: "#services" },
-        { name: "Consulting", href: "#services" },
-        { name: "Technical Writing", href: "#services" },
+        { name: "Product Engineering", href: "#services" },
+        { name: "30-Day MVP Sprint", href: "#mvp-sprint" },
       ],
     },
     {
       title: "Company",
       links: [
         { name: "About", href: "#about" },
-        /*  { name: "Blog", href: "/blog" }, */
-        /*  { name: "Careers", href: "#careers" }, */
+        { name: "Why QueztLabs", href: "#why-queztlabs" },
+        { name: "Process", href: "#process" },
+        { name: "Pricing", href: "#pricing" },
         { name: "Contact", href: "#contact" },
       ],
     },
-    /* {
-      title: "Legal",
+    {
+      title: "Resources",
       links: [
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Terms of Service", href: "/terms" },
+        { name: "FAQ", href: "#faq" },
+        { name: "Support", href: "#support" },
+        { name: "Book Strategy Call", href: "#contact" },
       ],
-    }, */
+    },
   ],
 };
 
@@ -76,63 +78,55 @@ export const navigation = {
 // ─────────────────────────────────────────────────────────────────────────────
 export const services = [
   {
+    id: "mvp-development",
+    title: "MVP Development",
+    description:
+      "Get to market in 6-8 weeks with a production-ready MVP that validates your idea and attracts early customers.",
+    icon: "smartphone",
+    features: [
+      "Fast time-to-market",
+      "Validate product-market fit",
+      "Production-ready code",
+      "Scalable foundation",
+    ],
+  },
+  {
+    id: "web-apps",
+    title: "Web Applications",
+    description:
+      "Build scalable web apps that handle growth. From SaaS dashboards to e-commerce platforms, we ship what works.",
+    icon: "globe",
+    features: [
+      "SaaS platforms",
+      "E-commerce solutions",
+      "Real-time features",
+      "Enterprise-ready",
+    ],
+  },
+  {
     id: "mobile-apps",
     title: "Mobile Apps",
     description:
-      "Native and cross-platform mobile applications built with React Native, Swift, and Kotlin for iOS and Android.",
+      "Native iOS and Android apps that users love. Built for performance, designed for scale, shipped on time.",
     icon: "smartphone",
     features: [
-      "iOS & Android",
-      "React Native",
-      "Performance Optimized",
-      "Offline Support",
+      "iOS & Android native",
+      "React Native cross-platform",
+      "App Store optimization",
+      "Performance-first",
     ],
   },
   {
-    id: "web-development",
-    title: "Web Development",
+    id: "product-engineering",
+    title: "Product Engineering",
     description:
-      "Modern, scalable web applications using Next.js, React, and cutting-edge technologies.",
-    icon: "globe",
-    features: [
-      "Next.js & React",
-      "Headless CMS",
-      "E-commerce",
-      "API Development",
-    ],
-  },
-  /* {
-    id: "ui-ux-design",
-    title: "UI/UX Design",
-    description:
-      "Human-centered design that creates intuitive, beautiful experiences your users will love.",
-    icon: "palette",
-    features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-  }, */
-  {
-    id: "consulting",
-    title: "Tech Consulting",
-    description:
-      "Strategic guidance to help you make the right technology decisions for your business.",
+      "Scale your product with architecture that grows. We build systems that handle millions of users, not just prototypes.",
     icon: "lightbulb",
     features: [
-      "Architecture Review",
-      "Tech Stack Selection",
-      "Team Augmentation",
-      "Code Audits",
-    ],
-  },
-  {
-    id: "technical-writing",
-    title: "Technical Writing & Documentation",
-    description:
-      "Clear documentation for users and developers. From guides to developer portals, built for clarity and scale.",
-    icon: "filetext",
-    features: [
-      "API Documentation",
-      "Developer Portals",
-      "User Guides",
-      "Docs-as-Code",
+      "System architecture",
+      "Performance optimization",
+      "Team scaling support",
+      "Technical leadership",
     ],
   },
 ];
@@ -359,34 +353,34 @@ export const pricingTiers = [
 // ─────────────────────────────────────────────────────────────────────────────
 export const faqs = [
   {
-    question: "How long does a typical project take?",
+    question: "Is 30 days really enough for an MVP?",
     answer:
-      "Project timelines vary based on scope and complexity. A simple MVP might take 6-8 weeks, while a full-featured product could take 3-6 months. We'll provide a detailed timeline during our discovery phase.",
+      "Yes, if you're focused on an MVP—not a full product. We prioritize core features that validate your idea. You can always add more later. Most founders overestimate what they need for launch.",
   },
   {
-    question: "Do you work with startups or only established companies?",
+    question: "Who owns the code?",
     answer:
-      "We work with both! From early-stage startups building their first MVP to enterprise companies launching new products, we adapt our approach to fit your stage and needs.",
+      "You do. 100%. The codebase is yours from day one. You get full access to the GitHub repository, all documentation, and complete IP ownership. No strings attached.",
   },
   {
-    question: "What technologies do you specialize in?",
+    question: "What tech stack do you use?",
     answer:
-      "We're experts in React, Next.js, React Native, Swift, Kotlin, Node.js, and various cloud platforms. We choose the best tech stack for each project based on requirements, not trends.",
+      "We choose the best stack for your product. Typically Next.js or React for web, React Native for mobile, Node.js or Python for backend. We're not married to any technology—we use what makes sense for your use case.",
   },
   {
-    question: "How do you handle project communication?",
+    question: "What happens after 30 days?",
     answer:
-      "We believe in radical transparency. You'll have access to a dedicated Slack channel, weekly video calls, and a project dashboard with real-time updates. You're never left wondering about progress.",
+      "You get 30 days of post-launch support for bug fixes and critical updates. After that, you can hire us for ongoing development, or take the codebase to any developer. We document everything so the transition is smooth.",
   },
   {
-    question: "What happens after the project launches?",
+    question: "What if I need changes during development?",
     answer:
-      "Every project includes post-launch support (duration varies by tier). We also offer ongoing maintenance and development partnerships for continued growth.",
+      "We build in weekly check-ins. If you need to adjust features or priorities, we discuss it together. Small changes are fine. Major scope changes may extend the timeline—we'll be transparent about that.",
   },
   {
-    question: "Can you work with our existing team?",
+    question: "Do you work with non-technical founders?",
     answer:
-      "We frequently embed with client teams for seamless collaboration. We can lead, augment, or consult—whatever works best for your organization.",
+      "Absolutely. Most of our clients are non-technical founders. We explain technical decisions in plain English, provide clear documentation, and make sure you understand what you're getting. You don't need to code to work with us.",
   },
 ];
 

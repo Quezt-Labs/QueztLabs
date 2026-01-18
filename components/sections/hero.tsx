@@ -38,7 +38,7 @@ export function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
-              New beginnings, endless possibilities
+              Founder-led product engineering
             </span>
           </motion.div>
 
@@ -57,8 +57,8 @@ export function Hero() {
               minHeight: "1.2em",
             }}
           >
-            We build digital products{" "}
-            <span className="font-serif italic">that matter</span>
+            Ship your MVP in weeks,{" "}
+            <span className="font-serif italic">not months</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -72,8 +72,8 @@ export function Hero() {
             }
             className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty"
           >
-            A technology studio crafting exceptional mobile apps, web products,
-            and digital experiences for ambitious companies.
+            We build web apps, mobile apps, and MVPs for founders who need to move fast. 
+            Real product experience. Production-ready code. No fluff.
           </motion.p>
 
           {/* CTAs */}
@@ -89,7 +89,7 @@ export function Hero() {
           >
             <Button size="lg" asChild>
               <Link href="#contact">
-                Start a Project
+                Book Free Discovery Call
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

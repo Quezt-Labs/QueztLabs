@@ -17,7 +17,6 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
  */
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -32,6 +31,8 @@ export function Contact() {
       name: formData.get("name"),
       email: formData.get("email"),
       company: formData.get("company"),
+      "project-type": formData.get("project-type"),
+      timeline: formData.get("timeline"),
       message: formData.get("message"),
     };
 
@@ -45,11 +46,8 @@ export function Contact() {
       const result = await response.json();
 
       if (response.ok) {
-        // Reset form before showing success message
-        if (formRef.current) {
-          formRef.current.reset();
-        }
-        setIsSubmitted(true);
+        // Redirect to thank you page
+        window.location.href = "/thank-you";
       } else {
         setError(result.error || "Something went wrong. Please try again.");
       }
@@ -65,9 +63,9 @@ export function Contact() {
     <section id="contact" className="py-20 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Contact"
-          title="Let's build something great together"
-          description="Ready to start your project? Get in touch and let's discuss how we can help."
+          badge="Get Started"
+          title="Book Your Free Strategy Call"
+          description="Let's discuss your product, timeline, and how we can help you ship faster. No sales pitch—just a real conversation."
         />
 
         <div className="mt-16 grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -84,11 +82,25 @@ export function Contact() {
               shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
             }
           >
-            <h3 className="text-2xl font-semibold mb-6">Get in touch</h3>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              Whether you have a project in mind or just want to chat about
-              possibilities, we'd love to hear from you.
-            </p>
+            <h3 className="text-2xl font-semibold mb-6">What to expect</h3>
+            <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
+              <p>
+                <strong className="text-foreground">30-minute strategy call</strong> to
+                understand your product vision and challenges.
+              </p>
+              <p>
+                <strong className="text-foreground">Honest assessment</strong>{" "}
+                of what's realistic for your timeline and budget.
+              </p>
+              <p>
+                <strong className="text-foreground">Clear next steps</strong>{" "}
+                if we're a good fit, or recommendations if we're not.
+              </p>
+              <p className="text-sm mt-6 pt-6 border-t border-border">
+                Limited slots available. We only take on 2-3 projects per month
+                to ensure quality.
+              </p>
+            </div>
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -146,20 +158,7 @@ export function Contact() {
               shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
             }
           >
-            {isSubmitted ? (
-              <div className="h-full flex items-center justify-center p-8 rounded-2xl bg-accent/20 border border-accent/30">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/30 flex items-center justify-center mx-auto mb-4">
-                    <Send className="w-8 h-8 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Message sent!</h3>
-                  <p className="text-muted-foreground">
-                    We'll get back to you within 24 hours.
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 {error && (
                   <div className="p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-sm">
                     {error}
@@ -171,12 +170,12 @@ export function Contact() {
                       htmlFor="name"
                       className="block text-sm font-medium mb-2"
                     >
-                      Name
+                      Your Name *
                     </label>
                     <Input
                       id="name"
                       name="name"
-                      placeholder="Your name"
+                      placeholder="John Doe"
                       required
                     />
                   </div>
@@ -185,13 +184,13 @@ export function Contact() {
                       htmlFor="email"
                       className="block text-sm font-medium mb-2"
                     >
-                      Email
+                      Email *
                     </label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="you@company.com"
+                      placeholder="john@startup.com"
                       required
                     />
                   </div>
@@ -201,12 +200,39 @@ export function Contact() {
                     htmlFor="company"
                     className="block text-sm font-medium mb-2"
                   >
-                    Company
+                    Company / Startup Name
                   </label>
                   <Input
                     id="company"
                     name="company"
-                    placeholder="Your company name"
+                    placeholder="Your startup name"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="project-type"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    What are you building? *
+                  </label>
+                  <Input
+                    id="project-type"
+                    name="project-type"
+                    placeholder="MVP, Web App, Mobile App, etc."
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="timeline"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Timeline / Budget Range
+                  </label>
+                  <Input
+                    id="timeline"
+                    name="timeline"
+                    placeholder="e.g., 6-8 weeks, $10K-$20K"
                   />
                 </div>
                 <div>
@@ -214,12 +240,12 @@ export function Contact() {
                     htmlFor="message"
                     className="block text-sm font-medium mb-2"
                   >
-                    Message
+                    Tell us about your product *
                   </label>
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder="Tell us about your project..."
+                    placeholder="What problem are you solving? What stage are you at? What's your biggest challenge right now?"
                     rows={5}
                     required
                   />
@@ -227,6 +253,7 @@ export function Contact() {
                 <Button
                   type="submit"
                   className="w-full"
+                  size="lg"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -235,14 +262,13 @@ export function Contact() {
                       Sending...
                     </>
                   ) : (
-                    <>
-                      Send Message
-                      <Send className="ml-2 h-4 w-4" />
-                    </>
+                  <>
+                    Request Strategy Call
+                    <Send className="ml-2 h-4 w-4" />
+                  </>
                   )}
                 </Button>
               </form>
-            )}
           </motion.div>
         </div>
       </div>

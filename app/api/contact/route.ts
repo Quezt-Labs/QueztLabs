@@ -11,9 +11,16 @@ import { company } from "@/lib/data";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const { name, email, company: companyName, message } = body;
+      try {
+        const body = await request.json();
+        const {
+          name,
+          email,
+          company: companyName,
+          "project-type": projectType,
+          timeline,
+          message,
+        } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -35,22 +42,41 @@ export async function POST(request: Request) {
     // Send email using Resend
     if (process.env.RESEND_API_KEY) {
       try {
+        const sanitizeHtml = (str: string) => {
+          return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        };
+
         const emailHtml = `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-              New Contact Form Submission
+              New Discovery Call Request
             </h2>
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin-top: 20px;">
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+              <p><strong>Name:</strong> ${sanitizeHtml(name)}</p>
+              <p><strong>Email:</strong> <a href="mailto:${sanitizeHtml(email)}">${sanitizeHtml(email)}</a></p>
               ${
                 companyName
-                  ? `<p><strong>Company:</strong> ${companyName}</p>`
+                  ? `<p><strong>Company:</strong> ${sanitizeHtml(companyName)}</p>`
                   : ""
               }
-              <p><strong>Message:</strong></p>
+              ${
+                projectType
+                  ? `<p><strong>Project Type:</strong> ${sanitizeHtml(projectType)}</p>`
+                  : ""
+              }
+              ${
+                timeline
+                  ? `<p><strong>Timeline/Budget:</strong> ${sanitizeHtml(timeline)}</p>`
+                  : ""
+              }
+              <p><strong>Project Details:</strong></p>
               <div style="background-color: white; padding: 15px; border-left: 3px solid #007bff; margin-top: 10px;">
-                ${message.replace(/\n/g, "<br>")}
+                ${sanitizeHtml(message).replace(/\n/g, "<br>")}
               </div>
             </div>
             <p style="margin-top: 20px; color: #666; font-size: 12px;">
@@ -61,27 +87,29 @@ export async function POST(request: Request) {
           </div>
         `;
 
-        const emailText = `
-New Contact Form Submission
+          const emailText = `
+    New Discovery Call Request
 
-Name: ${name}
-Email: ${email}
-${companyName ? `Company: ${companyName}` : ""}
+    Name: ${name}
+    Email: ${email}
+    ${companyName ? `Company: ${companyName}` : ""}
+    ${projectType ? `Project Type: ${projectType}` : ""}
+    ${timeline ? `Timeline/Budget: ${timeline}` : ""}
 
-Message:
-${message}
+    Project Details:
+    ${message}
 
----
-This message was sent from the contact form on ${company.name} website.
-        `;
+    ---
+    This message was sent from the contact form on ${company.name} website.
+          `;
 
         await resend.emails.send({
           from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
           to: company.email,
           replyTo: email,
-          subject: `New inquiry from ${name}${
-            companyName ? ` (${companyName})` : ""
-          }`,
+            subject: `Discovery Call Request: ${projectType || "New Project"} from ${name}${
+              companyName ? ` (${companyName})` : ""
+            }`,
           html: emailHtml,
           text: emailText,
         });

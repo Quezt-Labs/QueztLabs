@@ -99,13 +99,25 @@ export function Support() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="#contact">
+              <Link href="#contact" onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}>
                 Get in Touch
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <Link href="#faq">See FAQ</Link>
+              <Link href="#faq" onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('faq');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}>See FAQ</Link>
             </Button>
           </div>
         </motion.div>

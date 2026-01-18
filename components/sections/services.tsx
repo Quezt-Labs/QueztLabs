@@ -25,8 +25,8 @@ export function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Services"
-          title="Everything you need to build exceptional products"
-          description="From initial concept to launch and beyond, we provide end-to-end digital product development services."
+          title="What we build"
+          description="We focus on outcomes, not features. Every project ships with production-ready code and a clear path to scale."
         />
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-items-center">

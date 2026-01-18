@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleTagManager } from "@/components/analytics/gtm";
 import { TawkToScript } from "@/components/chatbot/tawk-to-script";
 import "./globals.css";
 
@@ -139,7 +140,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${geistMono.variable} scroll-smooth`}
     >
       <head>
         {/* Preconnect to Google Fonts - must be in head for proper detection */}
@@ -167,6 +168,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <GoogleTagManager />
         {children}
         <Analytics />
         {/* Tawk.to Live Chat Script */}
