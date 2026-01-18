@@ -57,18 +57,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://queztlabs.tech"),
   title: {
-    default: "Quezt Labs | Premium Digital Products & Mobile Apps",
+    default: "Quezt Labs | Launch Your MVP in 30 Days",
     template: "%s | Quezt Labs",
   },
   description:
-    "We craft exceptional mobile apps, web products, and digital experiences. A technology studio focused on turning ambitious ideas into reality.",
+    "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering for ambitious startups.",
   keywords: [
-    "mobile app development",
-    "web development",
-    "digital products",
-    "technology studio",
-    "UI/UX design",
-    "software development",
+    "MVP development",
+    "Web Applications",
+    "Mobile Apps",
+    "Product Engineering",
+    "Startup Engineering",
+    "30-Day MVP",
+    "Founder-led Engineering",
   ],
   authors: [{ name: "Quezt Labs" }],
   creator: "Quezt Labs",
@@ -78,24 +79,32 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://queztlabs.tech",
     siteName: "Quezt Labs",
-    title: "Quezt Labs | Premium Digital Products & Mobile Apps",
+    title: "Quezt Labs | Launch Your MVP in 30 Days",
     description:
-      "We craft exceptional mobile apps, web products, and digital experiences.",
+      "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering for ambitious startups.",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://queztlabs.tech/logo.png",
         width: 1200,
         height: 630,
-        alt: "Quezt Labs - Premium Digital Products",
+        alt: "Quezt Labs - Launch Your MVP in 30 Days",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Quezt Labs | Premium Digital Products & Mobile Apps",
+    title: "Quezt Labs | Launch Your MVP in 30 Days",
     description:
-      "We craft exceptional mobile apps, web products, and digital experiences.",
-    images: ["/og-image.png"],
+      "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering.",
+    images: [
+      {
+        url: "https://queztlabs.tech/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Quezt Labs - Launch Your MVP in 30 Days",
+      },
+    ],
     creator: "@queztlabs",
   },
   robots: {
