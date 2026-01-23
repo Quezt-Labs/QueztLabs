@@ -68,7 +68,7 @@ export function Contact() {
           description="Let's discuss your product, timeline, and how we can help you ship faster. No sales pitch—just a real conversation."
         />
 
-        <div className="mt-8 sm:mt-12 lg:mt-16 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 max-w-5xl mx-auto">
+        <div className="mt-8 sm:mt-12 lg:mt-16 grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
             initial={
@@ -81,9 +81,10 @@ export function Contact() {
             transition={
               shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
             }
+            className="order-2 lg:order-1"
           >
-            <h3 className="text-2xl font-semibold mb-6">What to expect</h3>
-            <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">What to expect</h3>
+            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
               <p>
                 <strong className="text-foreground">30-minute strategy call</strong> to
                 understand your product vision and challenges.
@@ -96,22 +97,22 @@ export function Contact() {
                 <strong className="text-foreground">Clear next steps</strong>{" "}
                 if we're a good fit, or recommendations if we're not.
               </p>
-              <p className="text-sm mt-6 pt-6 border-t border-border">
+              <p className="text-xs sm:text-sm mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-border">
                 Limited slots available. We only take on 2-3 projects per month
                 to ensure quality.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5" />
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                  <p className="font-medium">Email</p>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-sm sm:text-base mb-1">Email</p>
                   <a
                     href={`mailto:${company.email}`}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors break-all"
                   >
                     {company.email}
                   </a>
@@ -133,13 +134,13 @@ export function Contact() {
                 </div>
               </div> */}
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                  <p className="font-medium">Office</p>
-                  <p className="text-muted-foreground">{company.address}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-sm sm:text-base mb-1">Office</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{company.address}</p>
                 </div>
               </div>
             </div>
@@ -157,18 +158,19 @@ export function Contact() {
             transition={
               shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }
             }
+            className="order-1 lg:order-2"
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {error && (
-                  <div className="p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                  <div className="p-3 sm:p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm">
                     {error}
                   </div>
                 )}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium mb-2"
+                      className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                     >
                       Your Name *
                     </label>
@@ -177,12 +179,13 @@ export function Contact() {
                       name="name"
                       placeholder="John Doe"
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium mb-2"
+                      className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                     >
                       Email *
                     </label>
@@ -192,13 +195,14 @@ export function Contact() {
                       type="email"
                       placeholder="john@startup.com"
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
                 </div>
                 <div>
                   <label
                     htmlFor="company"
-                    className="block text-sm font-medium mb-2"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                   >
                     Company / Startup Name
                   </label>
@@ -206,12 +210,13 @@ export function Contact() {
                     id="company"
                     name="company"
                     placeholder="Your startup name"
+                    className="text-sm sm:text-base"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="project-type"
-                    className="block text-sm font-medium mb-2"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                   >
                     What are you building? *
                   </label>
@@ -220,12 +225,13 @@ export function Contact() {
                     name="project-type"
                     placeholder="MVP, Web App, Mobile App, etc."
                     required
+                    className="text-sm sm:text-base"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="timeline"
-                    className="block text-sm font-medium mb-2"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                   >
                     Timeline / Budget Range
                   </label>
@@ -233,12 +239,13 @@ export function Contact() {
                     id="timeline"
                     name="timeline"
                     placeholder="e.g., 6-8 weeks, $10K-$20K"
+                    className="text-sm sm:text-base"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium mb-2"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
                   >
                     Tell us about your product *
                   </label>
@@ -246,13 +253,14 @@ export function Contact() {
                     id="message"
                     name="message"
                     placeholder="What problem are you solving? What stage are you at? What's your biggest challenge right now?"
-                    rows={5}
+                    rows={4}
                     required
+                    className="text-sm sm:text-base resize-none"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full text-sm sm:text-base"
                   size="lg"
                   disabled={isSubmitting}
                 >
