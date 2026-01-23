@@ -295,7 +295,7 @@ export const pricingTiers = [
     name: "Starter",
     description:
       "Perfect for startups and MVPs. Launch fast, build trust, and validate your idea with professional quality.",
-    price: "600",
+    price: "1,999",
     priceNote: "Starting from",
     features: [
       "One platform of your choice (iOS, Android, or Web)",
@@ -314,7 +314,7 @@ export const pricingTiers = [
     id: "growth",
     name: "Growth",
     description: "Scale your product across all platforms",
-    price: "1,800",
+    price: "4,999",
     priceNote: "Starting from",
     features: [
       "All platforms: iOS, Android & Web together",
