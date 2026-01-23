@@ -38,8 +38,8 @@ export const navigation = {
     /*  { name: "Work", href: "#portfolio" }, */
     { name: "Process", href: "#process" },
     { name: "Pricing", href: "#pricing" },
-    /*  { name: "Blog", href: "/blog" }, */
-    { name: "Contact", href: "#contact" },
+    { name: "Support", href: "#support" },
+    /*  { name: "Contact", href: "#contact" }, */
   ],
   footer: [
     {

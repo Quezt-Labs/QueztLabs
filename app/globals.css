@@ -182,3 +182,16 @@ html {
 .dark .bg-grid-small-white\/\[0\.2\] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.2)'%3e%3cpath d='m0 .5h32m-32 32v-32'/%3e%3c/svg%3e");
 }
+
+/* Fix for resizable navbar - ensure only one nav shows at a time */
+@media (min-width: 1024px) {
+  [data-mobile-nav="true"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  [data-desktop-nav="true"] {
+    display: none !important;
+  }
+}
