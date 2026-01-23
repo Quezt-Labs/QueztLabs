@@ -60,7 +60,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 lg:py-32">
+    <section id="contact" className="py-12 sm:py-16 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Get Started"
@@ -68,7 +68,7 @@ export function Contact() {
           description="Let's discuss your product, timeline, and how we can help you ship faster. No sales pitch—just a real conversation."
         />
 
-        <div className="mt-16 grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="mt-8 sm:mt-12 lg:mt-16 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
             initial={
