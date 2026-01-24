@@ -208,7 +208,7 @@ All content is centralized in `lib/data.ts`:
 export const company = {
   name: "Quezt Labs",
   tagline: "We build digital products that matter",
-  email: "hello@queztlabs.tech",
+  email: "admin@queztlabs.tech",
   // ...
 };
 
@@ -442,7 +442,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For questions, issues, or feature requests:
 
 - Open an issue on [GitHub](https://github.com/your-repo/issues)
-- Email: hello@queztlabs.tech
+- Email: admin@queztlabs.tech
 
 ---
 

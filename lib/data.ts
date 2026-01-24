@@ -17,8 +17,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 export const company = {
   name: "Quezt Labs",
-  tagline: "We build digital products that matter",
-  email: "hello@queztlabs.tech",
+  tagline: "Ship your MVP in weeks, not months",
+  email: "admin@queztlabs.tech",
   /*  phone: "+1 (555) 123-4567", */
   address: "Delhi, India",
   /* social: {
