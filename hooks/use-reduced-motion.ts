@@ -36,4 +36,3 @@ export function useReducedMotion() {
 
   return prefersReducedMotion || isMobile;
 }
-

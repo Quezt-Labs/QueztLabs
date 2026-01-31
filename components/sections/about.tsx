@@ -69,7 +69,9 @@ export function About() {
             }
             viewport={{ once: true, margin: "-100px" }}
             transition={
-              shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { duration: 0.5, delay: 0.2 }
             }
             className="mt-12"
           >

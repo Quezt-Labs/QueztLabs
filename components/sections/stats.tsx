@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { AnimatedCounter } from "@/components/ui/animated-counter"
-import { stats } from "@/lib/data"
+import { motion } from "framer-motion";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { stats } from "@/lib/data";
 
 /**
  * Stats section showing key metrics with animated counters
@@ -21,12 +21,15 @@ export function Stats() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <AnimatedCounter value={stat.value} className="text-3xl lg:text-4xl font-bold" />
+              <AnimatedCounter
+                value={stat.value}
+                className="text-3xl lg:text-4xl font-bold"
+              />
               <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

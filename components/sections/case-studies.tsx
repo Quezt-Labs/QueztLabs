@@ -106,9 +106,7 @@ export function CaseStudies() {
           }
           viewport={{ once: true, margin: "-100px" }}
           transition={
-            shouldReduceMotion
-              ? { duration: 0 }
-              : { duration: 0.5, delay: 0.3 }
+            shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.3 }
           }
           className="mt-16 text-center"
         >

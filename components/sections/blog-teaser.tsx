@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { SectionHeader } from "@/components/ui/section-header"
-import { blogPosts } from "@/lib/data"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
+import { blogPosts } from "@/lib/data";
 
 /**
  * Blog teaser section showing recent posts
  */
 export function BlogTeaser() {
-  const featuredPosts = blogPosts.filter((post) => post.featured).slice(0, 2)
+  const featuredPosts = blogPosts.filter((post) => post.featured).slice(0, 2);
 
   return (
     <section id="blog" className="py-20 lg:py-32">
@@ -45,8 +45,12 @@ export function BlogTeaser() {
                   <span>•</span>
                   <span>{post.readTime}</span>
                 </div>
-                <h3 className="text-xl font-semibold group-hover:underline underline-offset-4">{post.title}</h3>
-                <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{post.excerpt}</p>
+                <h3 className="text-xl font-semibold group-hover:underline underline-offset-4">
+                  {post.title}
+                </h3>
+                <p className="mt-2 text-muted-foreground text-sm leading-relaxed">
+                  {post.excerpt}
+                </p>
               </Link>
             </motion.article>
           ))}
@@ -68,5 +72,5 @@ export function BlogTeaser() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

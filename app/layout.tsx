@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleTagManager } from "@/components/analytics/gtm";
-import { TawkToScript } from "@/components/chatbot/tawk-to-script";
 import "./globals.css";
 
 /**
@@ -180,8 +179,6 @@ export default function RootLayout({
         <GoogleTagManager />
         {children}
         <Analytics />
-        {/* Tawk.to Live Chat Script */}
-        <TawkToScript />
       </body>
     </html>
   );

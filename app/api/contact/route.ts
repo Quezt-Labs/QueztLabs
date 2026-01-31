@@ -11,16 +11,16 @@ import { company } from "@/lib/data";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-      try {
-        const body = await request.json();
-        const {
-          name,
-          email,
-          company: companyName,
-          "project-type": projectType,
-          timeline,
-          message,
-        } = body;
+  try {
+    const body = await request.json();
+    const {
+      name,
+      email,
+      company: companyName,
+      "project-type": projectType,
+      timeline,
+      message,
+    } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
           </div>
         `;
 
-          const emailText = `
+        const emailText = `
     New Discovery Call Request
 
     Name: ${name}
@@ -107,9 +107,9 @@ export async function POST(request: Request) {
           from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
           to: company.email,
           replyTo: email,
-            subject: `Discovery Call Request: ${projectType || "New Project"} from ${name}${
-              companyName ? ` (${companyName})` : ""
-            }`,
+          subject: `Discovery Call Request: ${projectType || "New Project"} from ${name}${
+            companyName ? ` (${companyName})` : ""
+          }`,
           html: emailHtml,
           text: emailText,
         });

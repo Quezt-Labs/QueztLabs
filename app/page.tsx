@@ -15,7 +15,7 @@ const Services = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32 bg-muted/50" />,
-  },
+  }
 );
 
 const Process = dynamic(
@@ -25,7 +25,7 @@ const Process = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const Pricing = dynamic(
@@ -35,7 +35,7 @@ const Pricing = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const FAQ = dynamic(
@@ -43,7 +43,7 @@ const FAQ = dynamic(
     import("@/components/sections/faq").then((mod) => ({ default: mod.FAQ })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const Support = dynamic(
@@ -53,7 +53,7 @@ const Support = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const Contact = dynamic(
@@ -63,7 +63,7 @@ const Contact = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const About = dynamic(
@@ -73,7 +73,7 @@ const About = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 const MVPSprint = dynamic(
@@ -83,7 +83,7 @@ const MVPSprint = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  },
+  }
 );
 
 /**

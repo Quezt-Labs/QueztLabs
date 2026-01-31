@@ -31,9 +31,10 @@ export function Footer() {
                 </span>
               </Link>
               <p className="text-base text-primary-foreground/70 max-w-md leading-relaxed mb-8">
-                {company.tagline}. We help startup founders launch production-ready MVPs in 30 days.
+                {company.tagline}. We help startup founders launch
+                production-ready MVPs in 30 days.
               </p>
-              
+
               {/* Contact Info */}
               <div className="space-y-4">
                 <a
@@ -82,7 +83,9 @@ export function Footer() {
               <p className="text-center sm:text-right">
                 Crafted with care in India
               </p>
-              <span className="hidden sm:inline text-primary-foreground/30">•</span>
+              <span className="hidden sm:inline text-primary-foreground/30">
+                •
+              </span>
               <Link
                 href="#contact"
                 className="text-primary-foreground/70 hover:text-primary-foreground transition-colors font-medium"

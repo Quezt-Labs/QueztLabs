@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, Mail, Calendar } from "lucide-react";
+import { CheckCircle, ArrowRight, Mail } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { company } from "@/lib/data";
@@ -25,14 +25,12 @@ export default function ThankYouPage() {
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              Thank You!
-            </h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Thank You!</h1>
 
             {/* Message */}
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              We've received your request for a free strategy call. Our team will
-              review your project and get back to you within 24 hours.
+              We've received your request for a free strategy call. Our team
+              will review your project and get back to you within 24 hours.
             </p>
 
             {/* What's Next */}
@@ -44,10 +42,12 @@ export default function ThankYouPage() {
                     1
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">We review your project</h3>
+                    <h3 className="font-semibold mb-1">
+                      We review your project
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Our team will carefully review your requirements and check if
-                      we're a good fit for your project.
+                      Our team will carefully review your requirements and check
+                      if we're a good fit for your project.
                     </p>
                   </div>
                 </div>
@@ -56,7 +56,9 @@ export default function ThankYouPage() {
                     2
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">We schedule your call</h3>
+                    <h3 className="font-semibold mb-1">
+                      We schedule your call
+                    </h3>
                     <p className="text-sm text-muted-foreground">
                       Within 24 hours, we'll email you to schedule a 30-minute
                       strategy call at a time that works for you.
@@ -68,10 +70,12 @@ export default function ThankYouPage() {
                     3
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">We discuss your product</h3>
+                    <h3 className="font-semibold mb-1">
+                      We discuss your product
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      During the call, we'll discuss your vision, timeline, and how
-                      we can help you ship your MVP faster.
+                      During the call, we'll discuss your vision, timeline, and
+                      how we can help you ship your MVP faster.
                     </p>
                   </div>
                 </div>

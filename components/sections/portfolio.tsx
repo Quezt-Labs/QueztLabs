@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
-import { SectionHeader } from "@/components/ui/section-header"
-import { caseStudies } from "@/lib/data"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
+import { caseStudies } from "@/lib/data";
 
 /**
  * Portfolio section with featured case studies
  */
 export function Portfolio() {
-  const featuredStudies = caseStudies.filter((study) => study.featured)
+  const featuredStudies = caseStudies.filter((study) => study.featured);
 
   return (
     <section id="portfolio" className="py-20 lg:py-32">
@@ -51,7 +51,9 @@ export function Portfolio() {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-2xl font-bold text-white">{study.title}</h3>
+                    <h3 className="text-2xl font-bold text-white">
+                      {study.title}
+                    </h3>
                     <p className="text-white/80 text-sm">{study.subtitle}</p>
                   </div>
                   <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -62,7 +64,9 @@ export function Portfolio() {
                   {study.metrics.slice(0, 3).map((metric) => (
                     <div key={metric.label}>
                       <p className="text-2xl font-bold">{metric.value}</p>
-                      <p className="text-xs text-muted-foreground">{metric.label}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {metric.label}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -87,5 +91,5 @@ export function Portfolio() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

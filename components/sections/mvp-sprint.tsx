@@ -93,10 +93,7 @@ export function MVPSprint() {
                   </p>
                   <ul className="space-y-1 text-sm text-muted-foreground">
                     {week.items.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="flex items-center gap-2"
-                      >
+                      <li key={itemIndex} className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-accent" />
                         {item}
                       </li>

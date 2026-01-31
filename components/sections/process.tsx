@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Search, Target, Palette, Code, Rocket } from "lucide-react"
-import { SectionHeader } from "@/components/ui/section-header"
-import { processSteps } from "@/lib/data"
-import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { motion } from "framer-motion";
+import { Search, Target, Palette, Code, Rocket } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
+import { processSteps } from "@/lib/data";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const iconMap = {
   Discovery: Search,
@@ -12,16 +12,19 @@ const iconMap = {
   Design: Palette,
   Development: Code,
   "Launch & Beyond": Rocket,
-}
+};
 
 /**
  * Process section showing the development workflow
  */
 export function Process() {
   const shouldReduceMotion = useReducedMotion();
-  
+
   return (
-    <section id="process" className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section
+      id="process"
+      className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
@@ -40,26 +43,42 @@ export function Process() {
           <div className="hidden lg:block absolute top-24 left-0 right-0 h-px z-0">
             {/* Base line */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-foreground/10 to-transparent" />
-            
+
             {/* Animated progress line */}
             <motion.div
               initial={shouldReduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
               whileInView={shouldReduceMotion ? { scaleX: 1 } : { scaleX: 1 }}
               viewport={{ once: true }}
-              transition={shouldReduceMotion ? { duration: 0 } : { duration: 2, ease: "easeInOut" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 2, ease: "easeInOut" }
+              }
               className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-foreground/40 to-transparent origin-left"
             />
 
             {/* Connection dots at each step position */}
             {processSteps.map((_, index) => {
-              const position = (index / (processSteps.length - 1)) * 100
+              const position = (index / (processSteps.length - 1)) * 100;
               return (
                 <motion.div
                   key={index}
-                  initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                  whileInView={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+                  initial={
+                    shouldReduceMotion
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0 }
+                  }
+                  whileInView={
+                    shouldReduceMotion
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 1, scale: 1 }
+                  }
                   viewport={{ once: true }}
-                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.2 + 0.5 }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.4, delay: index * 0.2 + 0.5 }
+                  }
                   className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
                   style={{ left: `${position}%` }}
                 >
@@ -68,35 +87,63 @@ export function Process() {
                   {!shouldReduceMotion && (
                     <motion.div
                       animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.3,
+                      }}
                       className="absolute inset-0 -z-10 w-3 h-3 rounded-full bg-primary-foreground/20"
                     />
                   )}
                 </motion.div>
-              )
+              );
             })}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
             {processSteps.map((step, index) => {
-              const Icon = iconMap[step.title as keyof typeof iconMap]
+              const Icon = iconMap[step.title as keyof typeof iconMap];
 
               return (
                 <motion.div
                   key={step.number}
-                  initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  whileInView={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                  initial={
+                    shouldReduceMotion
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 30 }
+                  }
+                  whileInView={
+                    shouldReduceMotion
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 1, y: 0 }
+                  }
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.15 }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.6, delay: index * 0.15 }
+                  }
                   className="relative group"
                 >
                   {/* Connection indicator on card top (desktop) */}
                   <div className="hidden lg:block absolute -top-6 left-1/2 -translate-x-1/2 z-20">
                     <motion.div
-                      initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                      whileInView={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+                      initial={
+                        shouldReduceMotion
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 0, scale: 0 }
+                      }
+                      whileInView={
+                        shouldReduceMotion
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 1, scale: 1 }
+                      }
                       viewport={{ once: true }}
-                      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.2 + 0.3 }}
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.4, delay: index * 0.2 + 0.3 }
+                      }
                       className="w-2 h-2 rounded-full bg-primary-foreground/60 border-2 border-primary-foreground/80"
                     />
                   </div>
@@ -134,8 +181,12 @@ export function Process() {
                         {Icon && (
                           <motion.div
                             className="p-2.5 rounded-xl bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors"
-                            whileHover={shouldReduceMotion ? {} : { rotate: 360 }}
-                            transition={shouldReduceMotion ? {} : { duration: 0.6 }}
+                            whileHover={
+                              shouldReduceMotion ? {} : { rotate: 360 }
+                            }
+                            transition={
+                              shouldReduceMotion ? {} : { duration: 0.6 }
+                            }
                           >
                             <Icon className="w-5 h-5 text-primary-foreground" />
                           </motion.div>
@@ -152,7 +203,7 @@ export function Process() {
                     </div>
                   </div>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -162,7 +213,9 @@ export function Process() {
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1 }}
           viewport={{ once: true }}
-          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
+          transition={
+            shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }
+          }
           className="mt-16 text-center"
         >
           <p className="text-sm text-primary-foreground/60">
@@ -177,5 +230,5 @@ export function Process() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

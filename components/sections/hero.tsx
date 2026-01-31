@@ -72,8 +72,8 @@ export function Hero() {
             }
             className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty"
           >
-            We build web apps, mobile apps, and MVPs for founders who need to move fast. 
-            Real product experience. Production-ready code. No fluff.
+            We build web apps, mobile apps, and MVPs for founders who need to
+            move fast. Real product experience. Production-ready code. No fluff.
           </motion.p>
 
           {/* CTAs */}
