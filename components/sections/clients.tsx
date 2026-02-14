@@ -223,40 +223,41 @@ function GalleryLightbox({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-w-[95vw]! lg:max-w-7xl w-[95vw]! lg:w-[90vw] h-auto max-h-[95vh] p-0 bg-black/95 border-0 gap-0 overflow-hidden">
-        <div className="w-full h-full p-4 lg:p-8">
-          <div className="mb-4 text-center">
-            <DialogTitle className="text-xl lg:text-2xl font-bold text-white">
+      <DialogContent className="max-w-[98vw] lg:max-w-7xl w-[98vw] lg:w-[90vw] h-auto max-h-[98vh] p-0 bg-black border-0 gap-0 overflow-hidden">
+        <div className="w-full h-full p-2 lg:p-6 overflow-y-auto">
+          <div className="mb-2 lg:mb-4 text-center sticky top-0 bg-black/80 backdrop-blur-sm py-2 z-10">
+            <DialogTitle className="text-base lg:text-2xl font-bold text-white">
               {projects[currentProject].name}
             </DialogTitle>
-            <DialogDescription className="text-sm text-gray-400 mt-1">
+            <DialogDescription className="text-xs lg:text-sm text-gray-300 mt-1">
               {slides.length} screenshots
             </DialogDescription>
           </div>
           <Carousel opts={{ loop: true }} setApi={setApi} className="w-full">
-            <CarouselContent className="-ml-2 lg:-ml-4">
+            <CarouselContent className="-ml-1 lg:-ml-4">
               {slides.map((s) => (
-                <CarouselItem key={s.src} className="pl-2 lg:pl-4">
-                  <div className="relative w-full h-[60vh] lg:h-[75vh] rounded-lg overflow-hidden bg-black">
+                <CarouselItem key={s.src} className="pl-1 lg:pl-4">
+                  <div className="relative w-full h-[70vh] lg:h-[75vh] rounded-md lg:rounded-lg overflow-hidden flex items-center justify-center">
                     <Image
                       src={s.src}
                       alt={s.title}
                       fill
                       className="object-contain"
-                      quality={95}
+                      quality={100}
                       priority
+                      sizes="(max-width: 768px) 98vw, 90vw"
                     />
                   </div>
-                  <div className="mt-3 text-center">
-                    <p className="text-sm lg:text-base font-medium text-white">
+                  <div className="mt-2 lg:mt-3 text-center px-2 py-2">
+                    <p className="text-xs lg:text-base font-medium text-white">
                       {s.title}
                     </p>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-2 lg:left-4 bg-white/90 hover:bg-white text-black border-0" />
-            <CarouselNext className="right-2 lg:right-4 bg-white/90 hover:bg-white text-black border-0" />
+            <CarouselPrevious className="left-1 lg:left-4 h-9 w-9 lg:h-12 lg:w-12 bg-white hover:bg-white text-black border-0 shadow-lg" />
+            <CarouselNext className="right-1 lg:right-4 h-9 w-9 lg:h-12 lg:w-12 bg-white hover:bg-white text-black border-0 shadow-lg" />
           </Carousel>
         </div>
       </DialogContent>
