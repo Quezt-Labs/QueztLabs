@@ -18,6 +18,16 @@ const Services = dynamic(
   }
 );
 
+const Clients = dynamic(
+  () =>
+    import("@/components/sections/clients").then((mod) => ({
+      default: mod.default,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  }
+);
+
 const Process = dynamic(
   () =>
     import("@/components/sections/process").then((mod) => ({
@@ -114,6 +124,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <WhyQueztLabs />
+        <Clients />
         <Services />
         <MVPSprint />
         <Process />

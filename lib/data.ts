@@ -542,6 +542,31 @@ export const clientLogos = [
   { name: "DigitalFirst", logo: "/digital-agency-logo-minimal.jpg" },
   { name: "FutureWorks", logo: "/future-tech-company-logo-minimal.jpg" },
   { name: "CloudNine", logo: "/cloud-company-logo-minimal.jpg" },
+  // New/featured clients (added per request)
+  {
+    name: "Inverted (Javelin)",
+    logo: "/clients/javelin.svg",
+    url: "https://javelin.inverted.in/",
+    blurb:
+      "Internal issue-tracking and lifecycle tool for streamlined engineering workflows — built for reliability and scale.",
+    screenshots: ["https://javelin.inverted.in/"],
+  },
+  {
+    name: "TestForce",
+    logo: "https://www.testforce.online/favicon.ico",
+    url: "https://www.testforce.online/",
+    blurb:
+      "A platform for students to practise and compete — realtime tests and analytics for educators and learners.",
+    screenshots: ["https://www.testforce.online/"],
+  },
+  {
+    name: "Grind Karo",
+    logo: "https://www.grindkaro.in/favicon.ico",
+    url: "https://www.grindkaro.in/",
+    blurb:
+      "Performance-first powerlifting coaching platform helping athletes train smarter and win competitions.",
+    screenshots: ["https://www.grindkaro.in/"],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
