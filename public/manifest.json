@@ -4,7 +4,7 @@
   "description": "We craft exceptional mobile apps, web products, and digital experiences.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#1a1a1a",
   "theme_color": "#1a1a1a",
   "orientation": "portrait-primary",
   "icons": [

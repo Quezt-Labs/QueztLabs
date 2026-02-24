@@ -10,7 +10,7 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
-import { navigation, company } from "@/lib/data";
+import { navigation, company, calBookingUrl } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -53,7 +53,13 @@ export default function ResizableHeader() {
             <NavbarButton variant="secondary" as={Link} href="#contact">
               Contact
             </NavbarButton>
-            <NavbarButton variant="primary" as={Link} href="#contact">
+            <NavbarButton
+              variant="primary"
+              as="a"
+              href={calBookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Start a Project
             </NavbarButton>
           </div>
@@ -114,8 +120,10 @@ export default function ResizableHeader() {
                 Contact
               </NavbarButton>
               <NavbarButton
-                as={Link}
-                href="#contact"
+                as="a"
+                href={calBookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"

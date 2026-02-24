@@ -50,12 +50,12 @@ export function Support() {
   return (
     <section
       id="support"
-      className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden"
+      className="py-20 lg:py-32 bg-muted text-foreground relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-foreground rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foreground rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -85,11 +85,11 @@ export function Support() {
                 }
                 className="text-center"
               >
-                <div className="w-16 h-16 rounded-2xl bg-primary-foreground/10 flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-8 h-8 text-primary-foreground" />
+                <div className="w-16 h-16 rounded-2xl bg-foreground/10 flex items-center justify-center mx-auto mb-4">
+                  <Icon className="w-8 h-8 text-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-primary-foreground/70 leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -109,14 +109,14 @@ export function Support() {
           }
           className="mt-16 max-w-3xl mx-auto text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 mb-6">
-            <Heart className="w-5 h-5 text-primary-foreground" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/10 mb-6">
+            <Heart className="w-5 h-5 text-foreground" />
             <span className="text-sm font-medium">Our Commitment</span>
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
             We don't just build products—we build relationships
           </h2>
-          <p className="text-lg text-primary-foreground/80 leading-relaxed mb-8">
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
             Launch day is just the beginning. We're your long-term technology
             partner, here to help you grow, iterate, and succeed. Whether it's a
             bug fix, a new feature, or strategic advice—we're always just a
@@ -144,7 +144,7 @@ export function Support() {
             <Button
               size="lg"
               variant="outline"
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
+              className="bg-transparent border-foreground/20 text-foreground hover:bg-foreground/10"
               asChild
             >
               <Link

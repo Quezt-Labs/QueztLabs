@@ -162,6 +162,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Reduce 300ms tap delay on mobile */
+  html {
+    touch-action: manipulation;
+  }
+  /* Smooth transitions for interactive elements */
+  a,
+  button {
+    @apply transition-colors duration-200 ease-out;
+  }
+  [data-slot="button"] {
+    @apply transition-all duration-200 ease-out;
+  }
 }
 
 /* Smooth scrolling for anchor links */

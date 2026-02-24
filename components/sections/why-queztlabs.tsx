@@ -60,9 +60,13 @@ export function WhyQueztLabs() {
                 transition={
                   shouldReduceMotion
                     ? { duration: 0 }
-                    : { duration: 0.5, delay: index * 0.1 }
+                    : {
+                        duration: 0.5,
+                        delay: index * 0.08,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }
                 }
-                className="p-6 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors"
+                className="p-6 rounded-xl bg-card/80 border border-border/80 hover:border-accent/40 hover:bg-card transition-all duration-300 backdrop-blur-sm"
               >
                 <div className="w-12 h-12 rounded-xl bg-accent/30 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-accent" />

@@ -15,7 +15,7 @@ const Services = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32 bg-muted/50" />,
-  }
+  },
 );
 
 const Clients = dynamic(
@@ -25,7 +25,7 @@ const Clients = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const Process = dynamic(
@@ -35,17 +35,7 @@ const Process = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
-);
-
-const Pricing = dynamic(
-  () =>
-    import("@/components/sections/pricing").then((mod) => ({
-      default: mod.Pricing,
-    })),
-  {
-    loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const FAQ = dynamic(
@@ -53,7 +43,7 @@ const FAQ = dynamic(
     import("@/components/sections/faq").then((mod) => ({ default: mod.FAQ })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const Support = dynamic(
@@ -63,7 +53,7 @@ const Support = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const Contact = dynamic(
@@ -73,7 +63,7 @@ const Contact = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const About = dynamic(
@@ -83,7 +73,7 @@ const About = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 const MVPSprint = dynamic(
@@ -93,7 +83,7 @@ const MVPSprint = dynamic(
     })),
   {
     loading: () => <div className="py-20 lg:py-32" />,
-  }
+  },
 );
 
 /**
@@ -124,12 +114,11 @@ export default function HomePage() {
       <main>
         <Hero />
         <WhyQueztLabs />
-        <Clients />
+        {/*  <Clients /> */}
         <Services />
         <MVPSprint />
         <Process />
         <About />
-        <Pricing />
         <Support />
         <FAQ />
         <Contact />

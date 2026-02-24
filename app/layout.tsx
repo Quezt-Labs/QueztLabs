@@ -56,52 +56,62 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://queztlabs.tech"),
   title: {
-    default: "Quezt Labs | Launch Your MVP in 30 Days",
+    default: "Quezt Labs | MVP Development, Web Apps & Growth Solutions",
     template: "%s | Quezt Labs",
   },
   description:
-    "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering for ambitious startups.",
+    "Founder-led product engineering. We build production-ready web apps, mobile apps, and MVPs for startups. Next.js, React Native, Flutter—plus branding and GTM. Delhi, India.",
   keywords: [
     "MVP development",
-    "Web Applications",
-    "Mobile Apps",
-    "Product Engineering",
-    "Startup Engineering",
-    "30-Day MVP",
-    "Founder-led Engineering",
+    "web app development",
+    "mobile app development",
+    "React Native",
+    "Next.js",
+    "Flutter",
+    "Electron",
+    "startup development",
+    "product engineering",
+    "founder-led engineering",
+    "branding and marketing",
+    "go-to-market strategy",
+    "India startup",
+    "Delhi tech",
   ],
-  authors: [{ name: "Quezt Labs" }],
+  authors: [{ name: "Quezt Labs", url: "https://queztlabs.tech" }],
   creator: "Quezt Labs",
   publisher: "Quezt Labs",
+  alternates: {
+    canonical: "https://queztlabs.tech",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://queztlabs.tech",
     siteName: "Quezt Labs",
-    title: "Quezt Labs | Launch Your MVP in 30 Days",
+    title: "Quezt Labs | MVP Development, Web Apps & Growth Solutions",
     description:
-      "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering for ambitious startups.",
+      "Founder-led product engineering. We build production-ready web apps, mobile apps, and MVPs for startups. Next.js, React Native, Flutter—plus branding and GTM. Delhi, India.",
     images: [
       {
         url: "https://queztlabs.tech/logo.png",
         width: 1200,
         height: 630,
-        alt: "Quezt Labs - Launch Your MVP in 30 Days",
+        alt: "Quezt Labs - MVP Development, Web Apps & Growth Solutions",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Quezt Labs | Launch Your MVP in 30 Days",
+    title: "Quezt Labs | MVP Development, Web Apps & Growth Solutions",
     description:
-      "We help startup founders launch production-ready MVPs in 30 days. Founder-led product engineering.",
+      "Founder-led product engineering. Web apps, mobile apps, MVPs—plus branding and GTM. Delhi, India.",
     images: [
       {
         url: "https://queztlabs.tech/logo.png",
         width: 1200,
         height: 630,
-        alt: "Quezt Labs - Launch Your MVP in 30 Days",
+        alt: "Quezt Labs - MVP Development, Web Apps & Growth Solutions",
       },
     ],
     creator: "@queztlabs",
@@ -132,10 +142,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
-  ],
+  themeColor: "#1a1a1a",
   width: "device-width",
   initialScale: 1,
 };
@@ -148,7 +155,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${geistMono.variable} scroll-smooth`}
+      className={`${inter.variable} ${playfair.variable} ${geistMono.variable} scroll-smooth dark`}
+      suppressHydrationWarning
     >
       <head>
         {/* Preconnect to Google Fonts - must be in head for proper detection */}

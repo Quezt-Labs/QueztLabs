@@ -4,12 +4,12 @@ import type React from "react";
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, Loader2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeader } from "@/components/ui/section-header";
-import { company } from "@/lib/data";
+import { company, calBookingUrl } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
@@ -79,7 +79,13 @@ export function Contact() {
             }
             viewport={{ once: true, margin: "-100px" }}
             transition={
-              shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.1 }
+              shouldReduceMotion
+                ? { duration: 0 }
+                : {
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }
             }
             className="order-2 lg:order-1 min-w-0"
           >
@@ -149,10 +155,51 @@ export function Contact() {
             }
             viewport={{ once: true, margin: "-100px" }}
             transition={
-              shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.1 }
+              shouldReduceMotion
+                ? { duration: 0 }
+                : {
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }
             }
-            className="order-1 lg:order-2 min-w-0"
+            className="order-1 lg:order-2 min-w-0 space-y-6"
           >
+            {/* Cal.com primary CTA */}
+            <div className="text-center sm:text-left">
+              <p className="mb-3 text-sm text-muted-foreground">
+                30-minute call. No commitment. We&apos;ll give you honest feedback.
+              </p>
+              <Button
+                size="lg"
+                className="w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href={calBookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Book via Cal.com
+                </a>
+              </Button>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Pick a time that works for you. No back-and-forth emails.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or send us a message
+                </span>
+              </div>
+            </div>
+
             <form
               ref={formRef}
               onSubmit={handleSubmit}

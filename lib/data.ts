@@ -13,6 +13,13 @@
  */
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CAL.COM BOOKING
+// ─────────────────────────────────────────────────────────────────────────────
+export const calBookingUrl =
+  process.env.NEXT_PUBLIC_CAL_URL ||
+  "https://calendly.com/admin-queztlabs/your-free-strategy-call";
+
+// ─────────────────────────────────────────────────────────────────────────────
 // COMPANY INFORMATION
 // ─────────────────────────────────────────────────────────────────────────────
 export const company = {
@@ -35,20 +42,14 @@ export const company = {
 export const navigation = {
   main: [
     { name: "Services", href: "#services" },
-    /*  { name: "Work", href: "#portfolio" }, */
     { name: "Process", href: "#process" },
-    { name: "Pricing", href: "#pricing" },
     { name: "Support", href: "#support" },
-    /*  { name: "Contact", href: "#contact" }, */
   ],
   footer: [
     {
       title: "Services",
       links: [
-        { name: "MVP Development", href: "#services" },
-        { name: "Web Applications", href: "#services" },
-        { name: "Mobile Apps", href: "#services" },
-        { name: "Product Engineering", href: "#services" },
+        { name: "View All Services", href: "#services" },
         { name: "30-Day MVP Sprint", href: "#mvp-sprint" },
       ],
     },
@@ -58,7 +59,6 @@ export const navigation = {
         { name: "About", href: "#about" },
         { name: "Why QueztLabs", href: "#why-queztlabs" },
         { name: "Process", href: "#process" },
-        { name: "Pricing", href: "#pricing" },
         { name: "Contact", href: "#contact" },
       ],
     },
@@ -67,66 +67,156 @@ export const navigation = {
       links: [
         { name: "FAQ", href: "#faq" },
         { name: "Support", href: "#support" },
-        { name: "Book Strategy Call", href: "#contact" },
+        { name: "Book Strategy Call", href: "/#contact" },
       ],
     },
   ],
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SERVICES
+// SERVICES - Tech + Business Solutions (PW LeapX style)
 // ─────────────────────────────────────────────────────────────────────────────
 export const services = [
+  // Technical Development
   {
-    id: "mvp-development",
-    title: "MVP Development",
+    id: "web-mvp-development",
+    slug: "web-mvp-development",
+    category: "tech" as const,
+    title: "Web & MVP Development",
     description:
-      "Get to market in 6-8 weeks with a production-ready MVP that validates your idea and attracts early customers.",
+      "Ship your MVP in weeks with Next.js, React, and Node. We build production-ready web apps that scale from day one.",
+    icon: "code",
+    features: ["Next.js & React", "6–8 week delivery", "Scalable architecture"],
+    deliverables: [
+      "Production-ready MVP in 6–8 weeks",
+      "Modern stack (Next.js, React, Node)",
+      "Responsive UI/UX for all devices",
+      "Clean, maintainable codebase",
+      "Edtech, Fintech, SaaS, Healthcare",
+    ],
+  },
+  {
+    id: "app-development",
+    slug: "app-development",
+    category: "tech" as const,
+    title: "Mobile & Desktop App Development",
+    description:
+      "Mobile apps for iOS and Android, plus desktop apps for Windows, macOS, and Linux. React Native, Flutter, Electron, Tauri—one team, all platforms.",
     icon: "smartphone",
     features: [
-      "Fast time-to-market",
-      "Validate product-market fit",
-      "Production-ready code",
-      "Scalable foundation",
+      "iOS & Android",
+      "Windows, macOS, Linux",
+      "React Native / Flutter / Electron",
+    ],
+    deliverables: [
+      "Mobile apps for iOS and Android (React Native, Flutter)",
+      "Desktop apps for Windows, macOS, Linux (Electron, Tauri)",
+      "App Store and Play Store deployment",
+      "Push notifications, offline support, auto-updates",
+      "Native integrations and performance optimization",
     ],
   },
   {
-    id: "web-apps",
-    title: "Web Applications",
+    id: "chatbot-automation",
+    slug: "chatbot-automation",
+    category: "tech" as const,
+    title: "Chatbot & Automation",
     description:
-      "Build scalable web apps that handle growth. From SaaS dashboards to e-commerce platforms, we ship what works.",
-    icon: "globe",
-    features: [
-      "SaaS platforms",
-      "E-commerce solutions",
-      "Real-time features",
-      "Enterprise-ready",
+      "AI-powered chatbots and workflow automation that handle support, qualify leads, and free your team.",
+    icon: "message-square",
+    features: ["AI chatbots", "Workflow automation", "CRM integrations"],
+    deliverables: [
+      "AI-powered chatbots and virtual assistants",
+      "Process automation and workflows",
+      "CRM and tool integrations",
+      "Natural language processing",
+      "24/7 automated customer support",
     ],
   },
   {
-    id: "mobile-apps",
-    title: "Mobile Apps",
+    id: "backend-integration",
+    slug: "backend-integration",
+    category: "tech" as const,
+    title: "Backend & System Integration",
     description:
-      "Native iOS and Android apps that users love. Built for performance, designed for scale, shipped on time.",
-    icon: "smartphone",
-    features: [
-      "iOS & Android native",
-      "React Native cross-platform",
-      "App Store optimization",
-      "Performance-first",
+      "APIs, microservices, and integrations that power your product. Secure, scalable, and built to last.",
+    icon: "server",
+    features: ["REST & GraphQL APIs", "Microservices", "Integrations"],
+    deliverables: [
+      "RESTful and GraphQL API design",
+      "Microservices architecture",
+      "Payment, auth, and third-party integrations",
+      "Database design and optimization",
+      "Secure authentication and authorization",
     ],
   },
   {
-    id: "product-engineering",
-    title: "Product Engineering",
+    id: "documentation",
+    slug: "documentation",
+    category: "tech" as const,
+    title: "Technical Documentation",
     description:
-      "Scale your product with architecture that grows. We build systems that handle millions of users, not just prototypes.",
-    icon: "lightbulb",
-    features: [
-      "System architecture",
-      "Performance optimization",
-      "Team scaling support",
-      "Technical leadership",
+      "API docs, user guides, and developer documentation that make your product easy to adopt and integrate.",
+    icon: "file-text",
+    features: ["API docs", "User guides", "Developer docs"],
+    deliverables: [
+      "API documentation (OpenAPI, Swagger)",
+      "User guides and onboarding docs",
+      "Developer integration guides",
+      "README and setup instructions",
+      "Changelog and versioning",
+    ],
+  },
+  {
+    id: "tech-planning",
+    slug: "tech-planning",
+    category: "tech" as const,
+    title: "Tech Planning & Infrastructure",
+    description:
+      "Cloud architecture, DevOps, and infrastructure that scale. AWS, GCP, Vercel—we pick the right stack.",
+    icon: "settings",
+    features: ["Cloud architecture", "CI/CD", "Infrastructure"],
+    deliverables: [
+      "Cloud architecture (AWS, GCP, Vercel)",
+      "CI/CD pipelines and automation",
+      "Infrastructure as Code",
+      "Monitoring and scaling strategies",
+      "Cost optimization",
+    ],
+  },
+  // Brand & Go-to-Market
+  {
+    id: "branding-marketing",
+    slug: "branding-marketing",
+    category: "business" as const,
+    title: "Branding and Marketing",
+    description:
+      "Brand identity, positioning, and digital growth strategies that help founders stand out and acquire users.",
+    icon: "megaphone",
+    features: ["Brand identity", "Positioning", "Growth strategies"],
+    deliverables: [
+      "Brand identity and visual design",
+      "Market positioning and messaging",
+      "Digital marketing strategy",
+      "Content and SEO",
+      "Growth experiments and analytics",
+    ],
+  },
+  {
+    id: "gtm-consultation",
+    slug: "gtm-consultation",
+    category: "business" as const,
+    title: "GTM & Consultation",
+    description:
+      "Go-to-market strategy and founder advisory for Indian startups. Product-market fit, pricing, and launch planning.",
+    icon: "trending-up",
+    features: ["GTM strategy", "Product-market fit", "Founder advisory"],
+    deliverables: [
+      "Go-to-market strategy and planning",
+      "Product-market fit validation",
+      "Pricing and positioning advice",
+      "Indian startup ecosystem expertise",
+      "Founder advisory and mentorship",
     ],
   },
 ];

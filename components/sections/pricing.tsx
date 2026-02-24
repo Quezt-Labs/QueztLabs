@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/pricing-table";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
-import { pricingTiers } from "@/lib/data";
-import Link from "next/link";
+import { pricingTiers, calBookingUrl } from "@/lib/data";
 
 // Convert pricingTiers to table format
 const FEATURES: FeatureItem[] = [
@@ -145,7 +144,13 @@ export function Pricing() {
                           )}
                           size="lg"
                         >
-                          <Link href="#contact">{tier.cta}</Link>
+                          <a
+                            href={calBookingUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {tier.cta}
+                          </a>
                         </Button>
                       </PricingTablePlan>
                     </th>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { caseStudies, blogPosts } from "@/lib/data";
+import { caseStudies, blogPosts, services } from "@/lib/data";
 
 /**
  * Dynamic Sitemap Generation
@@ -50,5 +50,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...caseStudyPages, ...blogPages];
+  // Service pages
+  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${baseUrl}/service/${service.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...caseStudyPages, ...servicePages, ...blogPages];
 }
