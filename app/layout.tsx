@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleTagManager } from "@/components/analytics/gtm";
+import Script from "next/script";
 import "./globals.css";
 
 /**
@@ -187,6 +188,12 @@ export default function RootLayout({
         <GoogleTagManager />
         {children}
         <Analytics />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3410281475975918"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
