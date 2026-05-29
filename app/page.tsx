@@ -96,6 +96,16 @@ const Portfolio = dynamic(
   },
 );
 
+const TechStack = dynamic(
+  () =>
+    import("@/components/sections/tech-stack").then((mod) => ({
+      default: mod.TechStack,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32 bg-muted/20" />,
+  },
+);
+
 /**
  * Home Page
  *
@@ -126,6 +136,7 @@ export default function HomePage() {
         <WhyQueztLabs />
         {/*  <Clients /> */}
         <Services />
+        <TechStack />
         <MVPSprint />
         <Portfolio />
         <Process />

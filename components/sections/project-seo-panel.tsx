@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   CheckCircle2,
   FileText,
-  Hash,
+  Hash as HashIcon,
   Link2,
   Search,
   Share2,
@@ -27,7 +27,15 @@ export function ProjectSeoPanel({
   const displayTitle = seo.ogTitle || seo.title;
   const displayDescription = seo.ogDescription || seo.description;
   const keywordPreview = seo.keywords?.slice(0, compact ? 3 : 5) ?? [];
+  const totalKeywords = seo.keywords?.length ?? 0;
+  const extraKeywordCount = Math.max(0, totalKeywords - keywordPreview.length);
+  const showExtraKeywords = extraKeywordCount > 0;
   const rich = hasRichSeo(seo);
+  const showOgBlock = Boolean(seo.ogTitle || seo.ogDescription);
+  const showDistinctOgTitle = Boolean(seo.ogTitle && seo.ogTitle !== seo.title);
+  const showDistinctOgDescription = Boolean(
+    seo.ogDescription && seo.ogDescription !== seo.description,
+  );
 
   return (
     <div className="rounded-xl border border-border/70 bg-muted/40 overflow-hidden">
@@ -87,27 +95,27 @@ export function ProjectSeoPanel({
           </p>
         </div>
 
-        {(seo.ogTitle || seo.ogDescription) && (
+        {showOgBlock ? (
           <div className="rounded-lg border border-border/50 bg-background/60 p-2.5 space-y-1.5">
             <p className="flex items-center gap-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
               <Share2 className="h-3 w-3" />
               Open Graph
             </p>
-            {seo.ogTitle && seo.ogTitle !== seo.title && (
+            {showDistinctOgTitle ? (
               <p className="text-xs font-medium line-clamp-1">{seo.ogTitle}</p>
-            )}
-            {seo.ogDescription && seo.ogDescription !== seo.description && (
+            ) : null}
+            {showDistinctOgDescription ? (
               <p className="text-[11px] text-muted-foreground line-clamp-2">
                 {seo.ogDescription}
               </p>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
 
-        {keywordPreview.length > 0 && (
+        {keywordPreview.length > 0 ? (
           <div className="space-y-1.5">
             <p className="flex items-center gap-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-              <Hash className="h-3 w-3" />
+              <HashIcon className="h-3 w-3" />
               Keywords
             </p>
             <div className="flex flex-wrap gap-1">
@@ -119,14 +127,14 @@ export function ProjectSeoPanel({
                   {kw}
                 </span>
               ))}
-              {(seo.keywords?.length ?? 0) > keywordPreview.length && (
+              {showExtraKeywords ? (
                 <span className="text-[10px] text-muted-foreground self-center">
-                  +{(seo.keywords?.length ?? 0) - keywordPreview.length}
+                  +{extraKeywordCount}
                 </span>
-              )}
+              ) : null}
             </div>
           </div>
-        )}
+        ) : null}
 
         <div className="flex flex-wrap gap-1.5 pt-0.5">
           {seo.robots && (

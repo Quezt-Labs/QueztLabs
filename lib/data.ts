@@ -42,6 +42,7 @@ export const company = {
 export const navigation = {
   main: [
     { name: "Services", href: "#services" },
+    { name: "Stack", href: "#tech-stack" },
     { name: "Work", href: "#portfolio" },
     { name: "Process", href: "#process" },
     { name: "Support", href: "#support" },
@@ -457,7 +458,7 @@ export const faqs = [
   {
     question: "What tech stack do you use?",
     answer:
-      "We choose the best stack for your product. Typically Next.js or React for web, React Native for mobile, Node.js or Python for backend. We're not married to any technology—we use what makes sense for your use case.",
+      "React, Next.js, and Astro on the frontend; Node.js and NestJS on the backend; Drizzle with PostgreSQL, MongoDB, and SQL where it fits; Redis and Kafka for cache and messaging; React Native for mobile; plus Vercel, AWS, and GCP for deploy. We pick what your product needs—not a one-size-fits-all template.",
   },
   {
     question: "What happens after 30 days?",

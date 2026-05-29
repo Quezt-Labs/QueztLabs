@@ -6,7 +6,6 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   ExternalLink,
-  Github,
   Globe,
   Layers,
   Sparkles,
@@ -117,7 +116,7 @@ function ProjectCard({
           <span className="truncate">{project.domain}</span>
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-2">
+        <div className="mt-auto">
           <a
             href={url}
             target="_blank"
@@ -126,15 +125,6 @@ function ProjectCard({
           >
             <ExternalLink className="h-3.5 w-3.5" />
             Live site
-          </a>
-          <a
-            href={`https://github.com/${project.github.org}/${project.github.repo}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-muted"
-          >
-            <Github className="h-3.5 w-3.5" />
-            Source
           </a>
         </div>
       </div>
