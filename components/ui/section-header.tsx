@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface SectionHeaderProps {
   badge?: string;
@@ -9,44 +10,62 @@ interface SectionHeaderProps {
   description?: string;
   align?: "left" | "center";
   className?: string;
+  light?: boolean;
 }
 
-/**
- * Reusable section header component with optional badge
- * Used across all major sections for consistent styling
- */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export function SectionHeader({
   badge,
   title,
   description,
   align = "center",
   className,
+  light = false,
 }: SectionHeaderProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.55, ease: EASE }}
       className={cn(
         "max-w-3xl",
         align === "center" ? "mx-auto text-center" : "text-left",
         className,
       )}
     >
-      {badge && (
-        <span className="inline-block px-3 py-1 mb-4 text-xs font-medium uppercase tracking-widest rounded-full bg-accent/20 text-accent border border-accent/30">
+      {badge ? (
+        <span
+          className={cn(
+            "badge-pill mb-5",
+            light && "border-white/20 bg-white/10 text-white/90",
+          )}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
           {badge}
         </span>
-      )}
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-balance tracking-[-0.02em]">
+      ) : null}
+      <h2
+        className={cn(
+          "text-3xl font-bold tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1] text-balance",
+          light && "text-white",
+        )}
+      >
         {title}
       </h2>
-      {description && (
-        <p className="mt-4 text-lg text-muted-foreground leading-relaxed text-pretty">
+      {description ? (
+        <p
+          className={cn(
+            "mt-4 text-lg leading-relaxed text-pretty",
+            light ? "text-white/70" : "text-muted-foreground",
+          )}
+        >
           {description}
         </p>
-      )}
+      ) : null}
     </motion.div>
   );
 }

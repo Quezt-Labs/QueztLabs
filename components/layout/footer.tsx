@@ -1,101 +1,88 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { company, navigation, calBookingUrl } from "@/lib/data";
 
-/**
- * Site footer with navigation links, contact info, and company details
- */
 export function Footer() {
   return (
-    <footer className="bg-muted text-foreground mt-20 lg:mt-32">
+    <footer className="mt-0 bg-foreground text-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-16 lg:py-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-            {/* Brand */}
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2">
-              <Link
-                href="/"
-                className="flex items-center gap-3 mb-6 hover:opacity-80 transition-opacity"
+        <div className="grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-20">
+          <div className="lg:col-span-5">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt={`${company.name} logo`}
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg"
+              />
+              <span className="text-xl font-semibold">{company.name}</span>
+            </Link>
+            <p className="mt-5 max-w-sm text-base leading-relaxed text-background/65">
+              {company.tagline}. Founder-led engineering for web, mobile, and
+              MVPs — shipped on real infrastructure.
+            </p>
+            <div className="mt-8 space-y-3 text-sm text-background/65">
+              <a
+                href={`mailto:${company.email}`}
+                className="flex items-center gap-2 hover:text-background transition-colors"
               >
-                <Image
-                  src="/logo.png"
-                  alt={`${company.name} Logo`}
-                  width={40}
-                  height={40}
-                  className="h-10 w-10"
-                  loading="lazy"
-                />
-                <span className="font-bold text-xl tracking-tight">
-                  {company.name}
-                </span>
-              </Link>
-              <p className="text-base text-muted-foreground max-w-md leading-relaxed mb-8">
-                {company.tagline}. We help startup founders launch
-                production-ready MVPs in 30 days.
+                <Mail className="h-4 w-4" />
+                {company.email}
+              </a>
+              <p className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                {company.address}
               </p>
-
-              {/* Contact Info */}
-              <div className="space-y-4">
-                <a
-                  href={`mailto:${company.email}`}
-                  className="flex items-center gap-3 text-base text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Mail className="w-5 h-5 shrink-0" />
-                  <span>{company.email}</span>
-                </a>
-                <div className="flex items-center gap-3 text-base text-muted-foreground">
-                  <MapPin className="w-5 h-5 shrink-0" />
-                  <span>{company.address}</span>
-                </div>
-              </div>
             </div>
+          </div>
 
-            {/* Navigation Links */}
-            {navigation.footer.map((group) => (
-              <div key={group.title} className="space-y-5">
-                <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground mb-4">
-                  {group.title}
-                </h3>
-                <ul className="space-y-4">
-                  {group.links.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className="text-base text-muted-foreground hover:text-foreground transition-colors inline-block py-2"
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {navigation.footer.map((group) => (
+            <div key={group.title} className="lg:col-span-2">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-background/50">
+                {group.title}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-background/70 hover:text-background transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="lg:col-span-3">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-background/50">
+              Start a project
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-background/65">
+              Tell us what you&apos;re building. We&apos;ll reply within one
+              business day.
+            </p>
+            <a
+              href={calBookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-opacity hover:opacity-90"
+            >
+              Book strategy call
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
-        <div className="pt-10 pb-8 border-t border-foreground/10">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            <p className="text-sm text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} {company.name}. All rights reserved.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-muted-foreground">
-              <p className="text-center sm:text-right">
-                Crafted with care in India
-              </p>
-              <span className="hidden sm:inline text-muted-foreground/50">
-                •
-              </span>
-              <a
-                href={calBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-              >
-                Book a Free Strategy Call
-              </a>
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-background/15 py-8 text-sm text-background/50 sm:flex-row">
+          <p>
+            © {new Date().getFullYear()} {company.name}. All rights reserved.
+          </p>
+          <p>Crafted in India · Vercel · Next.js</p>
         </div>
       </div>
     </footer>

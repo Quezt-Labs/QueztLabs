@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { company, calBookingUrl } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
@@ -60,270 +61,274 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-32 overflow-hidden">
+    <SectionShell id="contact">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          badge="Get Started"
-          title="Book Your Free Strategy Call"
-          description="Let's discuss your product, timeline, and how we can help you ship faster. No sales pitch—just a real conversation."
-        />
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-foreground p-6 text-background shadow-2xl sm:p-10 lg:p-12">
+          <SectionHeader
+            badge="Get started"
+            title="Book your free strategy call"
+            description="Tell us what you're building. No sales pitch — just a straight conversation about timeline and fit."
+            light
+            align="left"
+            className="max-w-xl !mx-0 !text-left"
+          />
 
-        <div className="mt-8 sm:mt-12 lg:mt-16 grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {/* Contact Info */}
-          <motion.div
-            initial={
-              shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }
-            }
-            whileInView={
-              shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }
-            }
-            viewport={{ once: true, margin: "-100px" }}
-            transition={
-              shouldReduceMotion
-                ? { duration: 0 }
-                : {
-                    duration: 0.5,
-                    delay: 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }
-            }
-            className="order-2 lg:order-1 min-w-0"
-          >
-            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
-              What to expect
-            </h3>
-            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
-              <p className="break-words">
-                <strong className="text-foreground">
-                  30-minute strategy call
-                </strong>{" "}
-                to understand your product vision and challenges.
-              </p>
-              <p className="break-words">
-                <strong className="text-foreground">Honest assessment</strong>{" "}
-                of what's realistic for your timeline and budget.
-              </p>
-              <p className="break-words">
-                <strong className="text-foreground">Clear next steps</strong> if
-                we're a good fit, or recommendations if we're not.
-              </p>
-              <p className="text-xs sm:text-sm mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-border break-words">
-                Limited slots available. We only take on 2-3 projects per month
-                to ensure quality.
-              </p>
-            </div>
-
-            <div className="space-y-4 sm:space-y-6">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-medium text-sm sm:text-base mb-1">Email</p>
-                  <a
-                    href={`mailto:${company.email}`}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors break-all"
-                  >
-                    {company.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/30 flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-medium text-sm sm:text-base mb-1">
-                    Office
-                  </p>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    {company.address}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={
-              shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }
-            }
-            whileInView={
-              shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }
-            }
-            viewport={{ once: true, margin: "-100px" }}
-            transition={
-              shouldReduceMotion
-                ? { duration: 0 }
-                : {
-                    duration: 0.5,
-                    delay: 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }
-            }
-            className="order-1 lg:order-2 min-w-0 space-y-6"
-          >
-            {/* Cal.com primary CTA */}
-            <div className="text-center sm:text-left">
-              <p className="mb-3 text-sm text-muted-foreground">
-                30-minute call. No commitment. We&apos;ll give you honest feedback.
-              </p>
-              <Button
-                size="lg"
-                className="w-full sm:w-auto"
-                asChild
-              >
-                <a
-                  href={calBookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Book via Cal.com
-                </a>
-              </Button>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Pick a time that works for you. No back-and-forth emails.
-              </p>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-border" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or send us a message
-                </span>
-              </div>
-            </div>
-
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="space-y-4 sm:space-y-6"
+          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* Contact Info */}
+            <motion.div
+              initial={
+                shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }
+              }
+              whileInView={
+                shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }
+              }
+              viewport={{ once: true, margin: "-100px" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: 0.5,
+                      delay: 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }
+              }
+              className="order-2 lg:order-1 min-w-0"
             >
-              {error && (
-                <div className="p-3 sm:p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm">
-                  {error}
+              <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-background">
+                What to expect
+              </h3>
+              <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-background/65 leading-relaxed mb-6 sm:mb-8">
+                <p className="break-words">
+                  <strong className="text-background">
+                    30-minute strategy call
+                  </strong>{" "}
+                  to understand your product vision and challenges.
+                </p>
+                <p className="break-words">
+                  <strong className="text-background">Honest assessment</strong>{" "}
+                  of what's realistic for your timeline and budget.
+                </p>
+                <p className="break-words">
+                  <strong className="text-background">Clear next steps</strong>{" "}
+                  if we're a good fit, or recommendations if we're not.
+                </p>
+                <p className="text-xs sm:text-sm mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-background/20 break-words">
+                  Limited slots available. We only take on 2-3 projects per
+                  month to ensure quality.
+                </p>
+              </div>
+
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-background" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-sm sm:text-base mb-1 text-background">
+                      Email
+                    </p>
+                    <a
+                      href={`mailto:${company.email}`}
+                      className="text-xs sm:text-sm text-background/65 hover:text-background transition-colors break-all"
+                    >
+                      {company.email}
+                    </a>
+                  </div>
                 </div>
-              )}
-              <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-background" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-sm sm:text-base mb-1 text-background">
+                      Office
+                    </p>
+                    <p className="text-xs sm:text-sm text-background/65">
+                      {company.address}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Contact Form */}
+            <motion.div
+              initial={
+                shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }
+              }
+              whileInView={
+                shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }
+              }
+              viewport={{ once: true, margin: "-100px" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: 0.5,
+                      delay: 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }
+              }
+              className="order-1 lg:order-2 min-w-0 space-y-6 rounded-2xl bg-background p-6 text-foreground shadow-inner"
+            >
+              {/* Cal.com primary CTA */}
+              <div className="text-center sm:text-left">
+                <p className="mb-3 text-sm text-muted-foreground">
+                  30-minute call. No commitment. We&apos;ll give you honest
+                  feedback.
+                </p>
+                <Button size="lg" className="w-full sm:w-auto" asChild>
+                  <a
+                    href={calBookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Your Name *
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    required
-                    className="text-sm sm:text-base"
-                  />
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Book via Cal.com
+                  </a>
+                </Button>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Pick a time that works for you. No back-and-forth emails.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
                 </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
-                  >
-                    Email *
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="john@startup.com"
-                    required
-                    className="text-sm sm:text-base"
-                  />
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or send us a message
+                  </span>
                 </div>
               </div>
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
-                >
-                  Company / Startup Name
-                </label>
-                <Input
-                  id="company"
-                  name="company"
-                  placeholder="Your startup name"
-                  className="text-sm sm:text-base"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="project-type"
-                  className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
-                >
-                  What are you building? *
-                </label>
-                <Input
-                  id="project-type"
-                  name="project-type"
-                  placeholder="MVP, Web App, Mobile App, etc."
-                  required
-                  className="text-sm sm:text-base"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="timeline"
-                  className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
-                >
-                  Timeline / Budget Range
-                </label>
-                <Input
-                  id="timeline"
-                  name="timeline"
-                  placeholder="e.g., 6-8 weeks, $10K-$20K"
-                  className="text-sm sm:text-base"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
-                >
-                  Tell us about your product *
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="What problem are you solving? What stage are you at? What's your biggest challenge right now?"
-                  rows={4}
-                  required
-                  className="text-sm sm:text-base resize-none"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full text-sm sm:text-base"
-                size="lg"
-                disabled={isSubmitting}
+
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-4 sm:space-y-6"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Request Strategy Call
-                    <Send className="ml-2 h-4 w-4" />
-                  </>
+                {error && (
+                  <div className="p-3 sm:p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm">
+                    {error}
+                  </div>
                 )}
-              </Button>
-            </form>
-          </motion.div>
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                    >
+                      Your Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder="John Doe"
+                      required
+                      className="text-sm sm:text-base"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                    >
+                      Email *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="john@startup.com"
+                      required
+                      className="text-sm sm:text-base"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                  >
+                    Company / Startup Name
+                  </label>
+                  <Input
+                    id="company"
+                    name="company"
+                    placeholder="Your startup name"
+                    className="text-sm sm:text-base"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="project-type"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                  >
+                    What are you building? *
+                  </label>
+                  <Input
+                    id="project-type"
+                    name="project-type"
+                    placeholder="MVP, Web App, Mobile App, etc."
+                    required
+                    className="text-sm sm:text-base"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="timeline"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                  >
+                    Timeline / Budget Range
+                  </label>
+                  <Input
+                    id="timeline"
+                    name="timeline"
+                    placeholder="e.g., 6-8 weeks, $10K-$20K"
+                    className="text-sm sm:text-base"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2"
+                  >
+                    Tell us about your product *
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="What problem are you solving? What stage are you at? What's your biggest challenge right now?"
+                    rows={4}
+                    required
+                    className="text-sm sm:text-base resize-none"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full text-sm sm:text-base"
+                  size="lg"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Request Strategy Call
+                      <Send className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

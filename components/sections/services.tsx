@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import {
   Code2,
@@ -14,13 +13,11 @@ import {
   FileText,
   Smartphone,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { services } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-
-type Service = (typeof services)[number];
-
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
 const iconMap: Record<string, LucideIcon> = {
   code: Code2,
@@ -33,43 +30,37 @@ const iconMap: Record<string, LucideIcon> = {
   smartphone: Smartphone,
 };
 
-/**
- * Services section - Tech + Business Solutions, premium technical styling
- */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export function Services() {
   const shouldReduceMotion = useReducedMotion();
-
   const techServices = services.filter((s) => s.category === "tech");
   const businessServices = services.filter((s) => s.category === "business");
 
   return (
-    <section
-      id="services"
-      className="py-20 lg:py-32 bg-muted/30 border-y border-border/50"
-    >
+    <SectionShell id="services" variant="muted">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Product Engineering Services"
-          title="MVP Development, Web Apps & Growth Solutions"
-          description="We build production-ready web apps, mobile apps, and MVPs for founders. Technical execution—from backend to AI—plus branding and go-to-market support when you need it."
+          badge="Services"
+          title="From MVP to go-to-market"
+          description="Engineering, mobile, backend, and growth—one founder-led team."
         />
 
-        <div className="mt-16 max-w-6xl mx-auto space-y-20">
-          <ServiceGroup
-            title="Technical Development"
-            items={techServices}
-            indexOffset={0}
-            shouldReduceMotion={shouldReduceMotion}
-          />
-          <ServiceGroup
-            title="Brand & Go-to-Market"
-            items={businessServices}
-            indexOffset={techServices.length}
-            shouldReduceMotion={shouldReduceMotion}
-          />
-        </div>
+        <ServiceGroup
+          title="Technical development"
+          items={techServices}
+          indexOffset={0}
+          shouldReduceMotion={shouldReduceMotion}
+        />
+        <ServiceGroup
+          title="Brand & go-to-market"
+          items={businessServices}
+          indexOffset={techServices.length}
+          shouldReduceMotion={shouldReduceMotion}
+          className="mt-16"
+        />
       </div>
-    </section>
+    </SectionShell>
   );
 }
 
@@ -78,28 +69,23 @@ function ServiceGroup({
   items,
   indexOffset,
   shouldReduceMotion,
+  className,
 }: {
   title: string;
-  items: Service[];
+  items: (typeof services)[number][];
   indexOffset: number;
   shouldReduceMotion: boolean;
+  className?: string;
 }) {
   if (items.length === 0) return null;
 
   return (
-    <motion.div
-      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-      whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={
-        shouldReduceMotion ? { duration: 0 } : { duration: 0.5, ease: EASE }
-      }
-    >
-      <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground/90 mb-8">
+    <div className={className}>
+      <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
         {title}
       </h3>
       <ul
-        className={`grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-2 ${
+        className={`grid gap-4 md:grid-cols-2 ${
           items.length >= 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
         }`}
       >
@@ -113,68 +99,62 @@ function ServiceGroup({
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }
 
-interface ServiceCardProps {
-  service: Service;
+function ServiceCard({
+  service,
+  index,
+  shouldReduceMotion,
+}: {
+  service: (typeof services)[number];
   index: number;
   shouldReduceMotion: boolean;
-}
-
-function ServiceCard({ service, index, shouldReduceMotion }: ServiceCardProps) {
+}) {
   const Icon = iconMap[service.icon] ?? Code2;
 
   return (
     <motion.div
-      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
       whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={
-        shouldReduceMotion
-          ? { duration: 0 }
-          : {
-              duration: 0.5,
-              delay: index * 0.06,
-              ease: EASE,
-            }
-      }
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.45,
+        delay: (index % 6) * 0.05,
+        ease: EASE,
+      }}
       className="h-full"
     >
       <Link
         href={`/service/${service.slug}`}
-        className="group flex h-full flex-col rounded-xl border border-border/80 bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card hover:shadow-lg"
+        className="group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-violet-300/50 hover:shadow-lg"
       >
-        <div className="flex items-start gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent/20 transition-colors group-hover:bg-accent/30">
-            <Icon className="h-5 w-5 text-accent" aria-hidden />
-          </div>
-          <div className="min-w-0 flex-1">
-            <h4 className="mb-1.5 text-base font-semibold transition-colors group-hover:text-accent">
-              {service.title}
-            </h4>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {service.description}
-            </p>
-          </div>
-          <ArrowRight
-            className="mt-1 h-4 w-4 shrink-0 text-muted-foreground/60 transition-all group-hover:translate-x-0.5 group-hover:text-accent"
-            aria-hidden
-          />
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 transition-colors group-hover:bg-violet-500/15">
+          <Icon className="h-5 w-5 text-violet-600" />
         </div>
-        {service.features.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-2 border-t border-border/60 pt-4">
-            {service.features.map((feature) => (
+        <h4 className="mt-4 text-lg font-semibold tracking-tight group-hover:text-violet-700 transition-colors">
+          {service.title}
+        </h4>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {service.description}
+        </p>
+        {service.features.length > 0 ? (
+          <ul className="mt-4 flex flex-wrap gap-1.5 border-t border-border/60 pt-4">
+            {service.features.map((f) => (
               <li
-                key={feature}
-                className="rounded-md bg-muted/80 px-2 py-1 text-xs text-muted-foreground"
+                key={f}
+                className="rounded-md bg-muted/80 px-2 py-0.5 text-[11px] text-muted-foreground"
               >
-                {feature}
+                {f}
               </li>
             ))}
           </ul>
-        )}
+        ) : null}
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground">
+          Learn more
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+        </span>
       </Link>
     </motion.div>
   );

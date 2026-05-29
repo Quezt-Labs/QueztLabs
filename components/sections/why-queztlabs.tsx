@@ -3,83 +3,99 @@
 import { motion } from "framer-motion";
 import { Code2, Rocket, Users, Shield } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import type { LucideIcon } from "lucide-react";
 
-const differentiators = [
+const differentiators: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  num: string;
+}[] = [
   {
+    num: "01",
     icon: Code2,
-    title: "Real Product Experience",
+    title: "Real product experience",
     description:
-      "We've built and scaled products ourselves. We know what breaks at 10K users, what slows down at 100K, and how to architect for millions.",
+      "We've scaled products past 100K users. We architect for what breaks in production—not slide decks.",
   },
   {
+    num: "02",
     icon: Rocket,
-    title: "Ship Fast, Ship Right",
+    title: "Ship in weeks",
     description:
-      "No endless discovery phases. We start building in week one. Your MVP ships in 6-8 weeks, not 6-8 months.",
+      "Building starts week one. MVPs in 6–8 weeks with clear milestones, not endless discovery.",
   },
   {
+    num: "03",
     icon: Users,
-    title: "Founder-Led, Not Agency-Led",
+    title: "Founder-led",
     description:
-      "You work directly with the founder who codes. No account managers, no handoffs, no broken telephone. Just results.",
+      "You work with the person who writes code. No account managers or broken telephone.",
   },
   {
+    num: "04",
     icon: Shield,
-    title: "Production-Ready from Day One",
+    title: "Production-grade",
     description:
-      "We don't build prototypes. Every line of code is written to production standards. Your MVP is built to scale, not rebuild.",
+      "Every line is written to ship—not throwaway prototype code you'll rebuild in six months.",
   },
 ];
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function WhyQueztLabs() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="why-queztlabs" className="py-20 lg:py-32">
+    <SectionShell id="why-queztlabs">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Why QueztLabs"
-          title="Built by founders, for founders"
-          description="We're not another agency. We're product engineers who've been where you are."
+          badge="Why Quezt Labs"
+          title="An agency that actually ships"
+          description="We're product engineers who've been founders. We optimize for speed, clarity, and code you can scale."
+          align="left"
+          className="max-w-2xl"
         />
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="mt-16 grid gap-4 sm:grid-cols-2">
           {differentiators.map((item, index) => {
             const Icon = item.icon;
             return (
-              <motion.div
-                key={index}
+              <motion.article
+                key={item.num}
                 initial={
                   shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
                 }
                 whileInView={
                   shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
                 }
-                viewport={{ once: true, margin: "-100px" }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : {
-                        duration: 0.5,
-                        delay: index * 0.08,
-                        ease: [0.25, 0.46, 0.45, 0.94],
-                      }
-                }
-                className="p-6 rounded-xl bg-card/80 border border-border/80 hover:border-accent/40 hover:bg-card transition-all duration-300 backdrop-blur-sm"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.06,
+                  ease: EASE,
+                }}
+                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-shadow hover:shadow-md lg:p-8"
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/30 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-accent" />
+                <span className="text-5xl font-bold tracking-tighter text-muted/80">
+                  {item.num}
+                </span>
+                <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10">
+                  <Icon className="h-5 w-5 text-violet-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="mt-4 text-xl font-semibold tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

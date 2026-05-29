@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Search, Target, Palette, Code, Rocket } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { processSteps } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
@@ -21,10 +22,7 @@ export function Process() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section
-      id="process"
-      className="py-20 lg:py-32 bg-muted text-foreground relative overflow-hidden"
-    >
+    <SectionShell id="process" variant="muted" className="relative">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-foreground rounded-full blur-3xl" />
@@ -229,6 +227,6 @@ export function Process() {
           </p>
         </motion.div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

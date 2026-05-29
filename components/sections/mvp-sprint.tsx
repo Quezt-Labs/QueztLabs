@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const sprintWeeks = [
@@ -56,55 +57,54 @@ export function MVPSprint() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="mvp-sprint" className="py-20 lg:py-32">
+    <SectionShell id="mvp-sprint">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeader
-            badge="MVP Sprint"
-            title="The 30-Day MVP Sprint"
-            description="A structured process that gets you from idea to users in one month"
-          />
+        <SectionHeader
+          badge="MVP Sprint"
+          title="Idea to live product in 30 days"
+          description="A week-by-week sprint — no vague timelines, no mystery phases."
+        />
 
-          <div className="mt-16 space-y-8">
-            {sprintWeeks.map((week, index) => (
-              <motion.div
-                key={index}
-                initial={
-                  shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
-                }
-                whileInView={
-                  shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
-                }
-                viewport={{ once: true, margin: "-100px" }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : { duration: 0.5, delay: index * 0.1 }
-                }
-                className="flex gap-6"
-              >
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-accent/30 flex items-center justify-center font-bold">
-                  {week.week}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">{week.title}</h3>
-                  <p className="text-muted-foreground mb-3">
-                    {week.description}
-                  </p>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    {week.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-accent" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="mt-16 grid gap-6 lg:grid-cols-2">
+          {sprintWeeks.map((week, index) => (
+            <motion.article
+              key={week.week}
+              initial={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }
+              }
+              whileInView={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+              }
+              viewport={{ once: true, margin: "-60px" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.45, delay: index * 0.08 }
+              }
+              className="rounded-2xl border border-border/70 bg-card p-6 shadow-sm"
+            >
+              <span className="inline-flex rounded-lg bg-violet-500/10 px-2.5 py-1 text-sm font-bold text-violet-700">
+                {week.week}
+              </span>
+              <h3 className="mt-4 text-lg font-semibold">{week.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                {week.description}
+              </p>
+              <ul className="mt-4 space-y-2">
+                {week.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet-600" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

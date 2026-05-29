@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ResizableHeader from "@/components/layout/resizable-header";
+import SiteHeader from "@/components/layout/site-header";
 import { Footer } from "@/components/layout/footer";
 import { Portfolio } from "@/components/sections/portfolio";
 import { BackToTop } from "@/components/ui/back-to-top";
@@ -22,7 +22,7 @@ export default function WorkPage() {
   return (
     <>
       <ScrollProgress />
-      <ResizableHeader />
+      <SiteHeader />
       <main className="pt-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-4">
           <Link

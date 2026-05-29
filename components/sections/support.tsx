@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -48,17 +49,8 @@ export function Support() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section
-      id="support"
-      className="py-20 lg:py-32 bg-muted text-foreground relative overflow-hidden"
-    >
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-foreground rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foreground rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <SectionShell id="support" variant="muted" className="relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Support"
           title="We're here for you, always"
@@ -166,6 +158,6 @@ export function Support() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

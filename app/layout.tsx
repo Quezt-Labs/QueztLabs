@@ -4,7 +4,9 @@ import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleTagManager } from "@/components/analytics/gtm";
 import Script from "next/script";
+import "lenis/dist/lenis.css";
 import "./globals.css";
+import { Providers } from "./providers";
 
 /**
  * Font Configuration
@@ -146,7 +148,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1a1a1a",
+  themeColor: "#fafafa",
   width: "device-width",
   initialScale: 1,
 };
@@ -159,7 +161,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${geistMono.variable} scroll-smooth dark`}
+      className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -187,9 +189,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased bg-background text-foreground">
         <GoogleTagManager />
-        {children}
+        <Providers>{children}</Providers>
         <Analytics />
         <Script
           async

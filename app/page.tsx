@@ -1,4 +1,4 @@
-import ResizableHeader from "@/components/layout/resizable-header";
+import SiteHeader from "@/components/layout/site-header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { WhyQueztLabs } from "@/components/sections/why-queztlabs";
@@ -86,6 +86,14 @@ const MVPSprint = dynamic(
   },
 );
 
+const LogoMarquee = dynamic(
+  () =>
+    import("@/components/sections/logo-marquee").then((mod) => ({
+      default: mod.LogoMarquee,
+    })),
+  { loading: () => <div className="h-20 border-y border-border/50" /> },
+);
+
 const Portfolio = dynamic(
   () =>
     import("@/components/sections/portfolio").then((mod) => ({
@@ -130,9 +138,10 @@ export default function HomePage() {
     <>
       <JsonLd />
       <ScrollProgress />
-      <ResizableHeader />
+      <SiteHeader />
       <main>
         <Hero />
+        <LogoMarquee />
         <WhyQueztLabs />
         {/*  <Clients /> */}
         <Services />

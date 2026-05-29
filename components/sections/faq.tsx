@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionShell } from "@/components/ui/section-shell";
 import {
   Accordion,
   AccordionContent,
@@ -15,7 +16,7 @@ import { faqs } from "@/lib/data";
  */
 export function FAQ() {
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-muted/50">
+    <SectionShell id="faq">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="FAQ"
@@ -44,6 +45,6 @@ export function FAQ() {
           </Accordion>
         </motion.div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

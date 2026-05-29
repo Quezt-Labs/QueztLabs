@@ -19,10 +19,13 @@ export function ProjectSeoPanel({
   seo,
   domain,
   compact = false,
+  embedded = false,
 }: {
   seo: ProjectSeo;
   domain: string;
   compact?: boolean;
+  /** Inside portfolio accordion — no duplicate outer chrome */
+  embedded?: boolean;
 }) {
   const displayTitle = seo.ogTitle || seo.title;
   const displayDescription = seo.ogDescription || seo.description;
@@ -38,21 +41,29 @@ export function ProjectSeoPanel({
   );
 
   return (
-    <div className="rounded-xl border border-border/70 bg-muted/40 overflow-hidden">
-      <div className="flex items-center gap-2 border-b border-border/60 bg-background/80 px-3 py-2">
-        <Search className="h-3.5 w-3.5 text-accent" aria-hidden />
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          SEO & social preview
-        </span>
-        {rich && (
-          <Badge
-            variant="secondary"
-            className="ml-auto text-[10px] px-1.5 py-0 h-5 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20"
-          >
-            Rich meta
-          </Badge>
-        )}
-      </div>
+    <div
+      className={cn(
+        embedded
+          ? "overflow-hidden"
+          : "rounded-xl border border-border/70 bg-muted/40 overflow-hidden",
+      )}
+    >
+      {!embedded ? (
+        <div className="flex items-center gap-2 border-b border-border/60 bg-background/80 px-3 py-2">
+          <Search className="h-3.5 w-3.5 text-accent" aria-hidden />
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            SEO & social preview
+          </span>
+          {rich ? (
+            <Badge
+              variant="secondary"
+              className="ml-auto text-[10px] px-1.5 py-0 h-5 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20"
+            >
+              Rich meta
+            </Badge>
+          ) : null}
+        </div>
+      ) : null}
 
       {seo.ogImage && !compact && (
         <div className="relative aspect-[1.91/1] w-full border-b border-border/60 bg-muted">
@@ -70,7 +81,15 @@ export function ProjectSeoPanel({
         </div>
       )}
 
-      <div className="space-y-3 p-3">
+      <div className={cn("space-y-3", embedded ? "pt-1" : "p-3")}>
+        {embedded && rich ? (
+          <Badge
+            variant="secondary"
+            className="text-[10px] px-1.5 py-0 h-5 bg-emerald-500/10 text-emerald-700 border-emerald-500/20"
+          >
+            Rich meta
+          </Badge>
+        ) : null}
         <div className="space-y-1">
           <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
             Google / &lt;title&gt;
