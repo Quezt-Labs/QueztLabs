@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import {
   Code2,
-  BarChart3,
-  Brain,
   MessageSquare,
   Server,
   Settings,
@@ -19,10 +18,12 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { services } from "@/lib/data";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+type Service = (typeof services)[number];
+
+const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+
+const iconMap: Record<string, LucideIcon> = {
   code: Code2,
-  "bar-chart": BarChart3,
-  brain: Brain,
   "message-square": MessageSquare,
   server: Server,
   settings: Settings,
@@ -54,83 +55,76 @@ export function Services() {
         />
 
         <div className="mt-16 max-w-6xl mx-auto space-y-20">
-          {/* Tech Category */}
-          {techServices.length > 0 && (
-            <motion.div
-              initial={
-                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
-              }
-              whileInView={
-                shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
-              }
-              viewport={{ once: true, margin: "-100px" }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
-              }
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground/90 mb-8">
-                Technical Development
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                {techServices.map((service, index) => (
-                  <ServiceCard
-                    key={service.id}
-                    service={service}
-                    index={index}
-                    shouldReduceMotion={shouldReduceMotion}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Business Solutions Category */}
-          {businessServices.length > 0 && (
-            <motion.div
-              initial={
-                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
-              }
-              whileInView={
-                shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
-              }
-              viewport={{ once: true, margin: "-100px" }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
-              }
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground/90 mb-8">
-                Brand & Go-to-Market
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                {businessServices.map((service, index) => (
-                  <ServiceCard
-                    key={service.id}
-                    service={service}
-                    index={techServices.length + index}
-                    shouldReduceMotion={shouldReduceMotion}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
+          <ServiceGroup
+            title="Technical Development"
+            items={techServices}
+            indexOffset={0}
+            shouldReduceMotion={shouldReduceMotion}
+          />
+          <ServiceGroup
+            title="Brand & Go-to-Market"
+            items={businessServices}
+            indexOffset={techServices.length}
+            shouldReduceMotion={shouldReduceMotion}
+          />
         </div>
       </div>
     </section>
   );
 }
 
+function ServiceGroup({
+  title,
+  items,
+  indexOffset,
+  shouldReduceMotion,
+}: {
+  title: string;
+  items: Service[];
+  indexOffset: number;
+  shouldReduceMotion: boolean;
+}) {
+  if (items.length === 0) return null;
+
+  return (
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+      whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={
+        shouldReduceMotion ? { duration: 0 } : { duration: 0.5, ease: EASE }
+      }
+    >
+      <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground/90 mb-8">
+        {title}
+      </h3>
+      <ul
+        className={`grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-2 ${
+          items.length >= 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+        }`}
+      >
+        {items.map((service, index) => (
+          <li key={service.id}>
+            <ServiceCard
+              service={service}
+              index={indexOffset + index}
+              shouldReduceMotion={shouldReduceMotion}
+            />
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
+
 interface ServiceCardProps {
-  service: (typeof services)[0];
+  service: Service;
   index: number;
   shouldReduceMotion: boolean;
 }
 
 function ServiceCard({ service, index, shouldReduceMotion }: ServiceCardProps) {
-  const Icon = iconMap[service.icon] || Code2;
+  const Icon = iconMap[service.icon] ?? Code2;
 
   return (
     <motion.div
@@ -143,28 +137,44 @@ function ServiceCard({ service, index, shouldReduceMotion }: ServiceCardProps) {
           : {
               duration: 0.5,
               delay: index * 0.06,
-              ease: [0.25, 0.46, 0.45, 0.94],
+              ease: EASE,
             }
       }
+      className="h-full"
     >
       <Link
         href={`/service/${service.slug}`}
-        className="group block p-6 rounded-xl bg-card/80 border border-border/80 hover:border-accent/40 hover:bg-card hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out h-full backdrop-blur-sm"
+        className="group flex h-full flex-col rounded-xl border border-border/80 bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card hover:shadow-lg"
       >
         <div className="flex items-start gap-4">
-          <div className="w-11 h-11 rounded-lg bg-accent/20 flex items-center justify-center shrink-0 group-hover:bg-accent/30 transition-colors">
-            <Icon className="w-5 h-5 text-accent" />
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent/20 transition-colors group-hover:bg-accent/30">
+            <Icon className="h-5 w-5 text-accent" aria-hidden />
           </div>
-          <div className="flex-1 min-w-0">
-            <h4 className="text-base font-semibold mb-1.5 group-hover:text-accent transition-colors">
+          <div className="min-w-0 flex-1">
+            <h4 className="mb-1.5 text-base font-semibold transition-colors group-hover:text-accent">
               {service.title}
             </h4>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {service.description}
             </p>
           </div>
-          <ArrowRight className="w-4 h-4 text-muted-foreground/60 group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
+          <ArrowRight
+            className="mt-1 h-4 w-4 shrink-0 text-muted-foreground/60 transition-all group-hover:translate-x-0.5 group-hover:text-accent"
+            aria-hidden
+          />
         </div>
+        {service.features.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-2 border-t border-border/60 pt-4">
+            {service.features.map((feature) => (
+              <li
+                key={feature}
+                className="rounded-md bg-muted/80 px-2 py-1 text-xs text-muted-foreground"
+              >
+                {feature}
+              </li>
+            ))}
+          </ul>
+        )}
       </Link>
     </motion.div>
   );

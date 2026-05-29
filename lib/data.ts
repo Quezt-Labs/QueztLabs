@@ -42,6 +42,7 @@ export const company = {
 export const navigation = {
   main: [
     { name: "Services", href: "#services" },
+    { name: "Work", href: "#portfolio" },
     { name: "Process", href: "#process" },
     { name: "Support", href: "#support" },
   ],
@@ -57,6 +58,7 @@ export const navigation = {
       title: "Company",
       links: [
         { name: "About", href: "#about" },
+        { name: "Portfolio", href: "/work" },
         { name: "Why QueztLabs", href: "#why-queztlabs" },
         { name: "Process", href: "#process" },
         { name: "Contact", href: "#contact" },

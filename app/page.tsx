@@ -86,6 +86,16 @@ const MVPSprint = dynamic(
   },
 );
 
+const Portfolio = dynamic(
+  () =>
+    import("@/components/sections/portfolio").then((mod) => ({
+      default: mod.Portfolio,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32" />,
+  },
+);
+
 /**
  * Home Page
  *
@@ -117,6 +127,7 @@ export default function HomePage() {
         {/*  <Clients /> */}
         <Services />
         <MVPSprint />
+        <Portfolio />
         <Process />
         <About />
         <Support />
