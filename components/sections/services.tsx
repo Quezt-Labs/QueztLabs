@@ -128,12 +128,12 @@ function ServiceCard({
     >
       <Link
         href={`/service/${service.slug}`}
-        className="group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-violet-300/50 hover:shadow-lg"
+        className="card-lift group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-sm hover:border-brand-border"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 transition-colors group-hover:bg-violet-500/15">
-          <Icon className="h-5 w-5 text-violet-600" />
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-muted transition-colors group-hover:bg-brand-muted/80">
+          <Icon className="h-5 w-5 text-brand" />
         </div>
-        <h4 className="mt-4 text-lg font-semibold tracking-tight group-hover:text-violet-700 transition-colors">
+        <h4 className="mt-4 text-lg font-semibold tracking-tight transition-colors group-hover:text-brand">
           {service.title}
         </h4>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">

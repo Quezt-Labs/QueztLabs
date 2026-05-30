@@ -1,64 +1,67 @@
 import type { MetadataRoute } from "next";
-import { caseStudies, blogPosts, services } from "@/lib/data";
+import { getAllBlogPosts } from "@/lib/blog";
+import { getAllCaseStudies } from "@/lib/case-studies";
+import { services } from "@/lib/data";
+import { SITE_URL } from "@/lib/seo";
 
-/**
- * Dynamic Sitemap Generation
- *
- * Generates a sitemap.xml with all pages for search engine crawling.
- * Next.js automatically serves this at /sitemap.xml
- *
- * Update the baseUrl to your production domain.
- */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://queztlabs.tech";
-
-  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/work`,
+      url: `${SITE_URL}/work`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.95,
     },
     {
-      url: `${baseUrl}/case-studies`,
+      url: `${SITE_URL}/case-studies`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${SITE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${SITE_URL}/tools`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/resources`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 
-  // Dynamic case study pages
-  const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
-    url: `${baseUrl}/case-studies/${study.id}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  const caseStudyPages: MetadataRoute.Sitemap = getAllCaseStudies().map(
+    (study) => ({
+      url: `${SITE_URL}/case-studies/${study.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }),
+  );
 
-  // Dynamic blog pages
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.id}`,
+  const blogPages: MetadataRoute.Sitemap = getAllBlogPosts().map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: post.featured ? 0.75 : 0.7,
   }));
 
-  // Service pages
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
-    url: `${baseUrl}/service/${service.slug}`,
+    url: `${SITE_URL}/service/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,

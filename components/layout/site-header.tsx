@@ -61,7 +61,7 @@ export default function SiteHeader() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <Link
-            href="#contact"
+            href="/#contact"
             className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Contact
@@ -102,7 +102,7 @@ export default function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 text-base text-muted-foreground"
             >

@@ -1,22 +1,16 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
-/**
- * Robots.txt Generation
- *
- * Controls search engine crawling behavior.
- * Next.js automatically serves this at /robots.txt
- */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://queztlabs.tech";
-
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin/"],
+        disallow: ["/api/", "/admin/", "/thank-you"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

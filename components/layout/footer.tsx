@@ -5,7 +5,7 @@ import { company, navigation, calBookingUrl } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="mt-0 bg-foreground text-background">
+    <footer className="mt-0 border-t border-border/40 bg-foreground text-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-20">
           <div className="lg:col-span-5">

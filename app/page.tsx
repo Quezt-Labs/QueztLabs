@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { SkipToContent } from "@/components/layout/skip-to-content";
 
 // Lazy load below-the-fold components for better performance
 const Services = dynamic(
@@ -114,6 +115,16 @@ const TechStack = dynamic(
   },
 );
 
+const InsightsHub = dynamic(
+  () =>
+    import("@/components/sections/insights-hub").then((mod) => ({
+      default: mod.InsightsHub,
+    })),
+  {
+    loading: () => <div className="py-20 lg:py-32 bg-muted/40" />,
+  },
+);
+
 /**
  * Home Page
  *
@@ -136,10 +147,11 @@ const TechStack = dynamic(
 export default function HomePage() {
   return (
     <>
+      <SkipToContent />
       <JsonLd />
       <ScrollProgress />
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <Hero />
         <LogoMarquee />
         <WhyQueztLabs />
@@ -148,6 +160,7 @@ export default function HomePage() {
         <TechStack />
         <MVPSprint />
         <Portfolio />
+        <InsightsHub />
         <Process />
         <About />
         <Support />

@@ -82,8 +82,8 @@ export function WhyQueztLabs() {
                 <span className="text-5xl font-bold tracking-tighter text-muted/80">
                   {item.num}
                 </span>
-                <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10">
-                  <Icon className="h-5 w-5 text-violet-600" />
+                <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-muted">
+                  <Icon className="h-5 w-5 text-brand" />
                 </div>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight">
                   {item.title}

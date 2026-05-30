@@ -3,270 +3,218 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { SubPageShell } from "@/components/layout/sub-page-shell";
+import { MarkdownContent } from "@/components/markdown-content";
 import { Button } from "@/components/ui/button";
-import { caseStudies } from "@/lib/data";
+import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
+import { JsonLdScripts } from "@/components/seo/json-ld";
+import { absoluteUrl, breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
 }
 
-/**
- * Generate static params for all case studies
- * Enables ISR for case study pages
- */
 export async function generateStaticParams() {
-  return caseStudies.map((study) => ({
+  return getAllCaseStudies().map((study) => ({
     slug: study.id,
   }));
 }
 
-/**
- * Generate dynamic metadata for each case study
- */
 export async function generateMetadata({
   params,
 }: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const study = caseStudies.find((s) => s.id === slug);
+  const study = getCaseStudyBySlug(slug);
 
   if (!study) {
-    return {
-      title: "Case Study Not Found",
-    };
+    return { title: "Case Study Not Found" };
   }
 
-  return {
+  return pageMetadata({
     title: `${study.title} | Case Study`,
     description: study.description,
-    openGraph: {
-      title: `${study.title} - ${study.subtitle}`,
-      description: study.description,
-      images: [{ url: study.image, width: 1200, height: 630 }],
-    },
-  };
+    path: `/case-studies/${study.id}`,
+    ogImage: study.image.startsWith("http") ? study.image : study.image,
+    keywords: [...study.services, study.industry, "case study", "Quezt Labs"],
+  });
 }
 
-/**
- * Individual Case Study Page
- * Features project details, metrics, and related work
- */
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const study = caseStudies.find((s) => s.id === slug);
+  const study = getCaseStudyBySlug(slug);
 
   if (!study) {
     notFound();
   }
 
-  // Find adjacent case studies for navigation
-  const currentIndex = caseStudies.findIndex((s) => s.id === slug);
-  const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+  const all = getAllCaseStudies();
+  const currentIndex = all.findIndex((s) => s.id === slug);
+  const prevStudy = currentIndex > 0 ? all[currentIndex - 1] : null;
   const nextStudy =
-    currentIndex < caseStudies.length - 1
-      ? caseStudies[currentIndex + 1]
-      : null;
+    currentIndex < all.length - 1 ? all[currentIndex + 1] : null;
 
-  // JSON-LD for case study
-  const caseStudySchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: study.title,
-    description: study.description,
-    image: study.image,
-    author: {
-      "@type": "Organization",
-      name: "Quezt Labs",
+  const imageUrl = study.image.startsWith("http")
+    ? study.image
+    : absoluteUrl(study.image);
+
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: study.title,
+      description: study.description,
+      image: imageUrl,
+      url: absoluteUrl(`/case-studies/${study.id}`),
+      author: { "@type": "Organization", name: "Quezt Labs" },
+      publisher: { "@id": "https://queztlabs.tech/#organization" },
     },
-  };
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Case Studies", path: "/case-studies" },
+      { name: study.title, path: `/case-studies/${study.id}` },
+    ]),
+  ];
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
-      />
-      <Header />
-      <main className="pt-20">
-        {/* Hero */}
-        <section className="py-12 lg:py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-              <Link
-                href="/"
-                className="hover:text-foreground transition-colors"
-              >
-                Home
-              </Link>
-              <span>/</span>
-              <Link
-                href="/case-studies"
-                className="hover:text-foreground transition-colors"
-              >
-                Case Studies
-              </Link>
-              <span>/</span>
-              <span className="text-foreground">{study.title}</span>
-            </nav>
+    <SubPageShell backHref="/case-studies" backLabel="All case studies">
+      <JsonLdScripts schemas={schemas} />
 
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  {study.services.map((service) => (
-                    <span
-                      key={service}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-accent/30 text-foreground"
+      <section className="py-12 lg:py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-12 lg:grid-cols-2">
+            <div>
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                {study.services.map((service) => (
+                  <span
+                    key={service}
+                    className="rounded-full bg-brand-muted px-3 py-1 text-xs font-medium text-brand"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+              <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
+                {study.title}
+              </h1>
+              <p className="mt-2 text-xl text-muted-foreground">
+                {study.subtitle}
+              </p>
+              <p className="mt-6 leading-relaxed text-muted-foreground">
+                {study.longDescription}
+              </p>
+
+              {study.stack.length > 0 ? (
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {study.stack.map((tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-md bg-muted px-2 py-1 text-xs text-muted-foreground"
                     >
-                      {service}
-                    </span>
+                      {tech}
+                    </li>
                   ))}
-                </div>
-                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
-                  {study.title}
-                </h1>
-                <p className="mt-2 text-xl text-muted-foreground">
-                  {study.subtitle}
-                </p>
-                <p className="mt-6 text-muted-foreground leading-relaxed">
-                  {study.longDescription}
-                </p>
+                </ul>
+              ) : null}
 
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Client</p>
-                    <p className="font-medium">{study.client}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Industry</p>
-                    <p className="font-medium">{study.industry}</p>
-                  </div>
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">Client</p>
+                  <p className="font-medium">{study.client}</p>
                 </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Industry</p>
+                  <p className="font-medium">{study.industry}</p>
+                </div>
+              </div>
 
-                <Button className="mt-8" asChild>
-                  <Link href="#contact">
-                    Start a Similar Project
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild>
+                  <a
+                    href={study.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View live product
                     <ExternalLink className="ml-2 h-4 w-4" />
-                  </Link>
+                  </a>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="/#contact">Start a similar project</Link>
                 </Button>
               </div>
+            </div>
 
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
-                <Image
-                  src={study.image || "/placeholder.svg"}
-                  alt={study.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
+              <Image
+                src={study.image || "/placeholder.svg"}
+                alt={study.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-muted/50 py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-center text-2xl font-bold">Key results</h2>
+          <div className="mx-auto grid max-w-3xl grid-cols-3 gap-8">
+            {study.metrics.map((metric) => (
+              <div key={metric.label} className="text-center">
+                <p className="text-4xl font-bold lg:text-5xl">{metric.value}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {metric.label}
+                </p>
               </div>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Metrics */}
-        <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold mb-8 text-center">Key Results</h2>
-            <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
-              {study.metrics.map((metric) => (
-                <div key={metric.label} className="text-center">
-                  <p className="text-4xl lg:text-5xl font-bold">
-                    {metric.value}
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {metric.label}
-                  </p>
+      <section className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[42rem]">
+            <MarkdownContent content={study.content} />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {prevStudy ? (
+              <Link
+                href={`/case-studies/${prevStudy.id}`}
+                className="group flex items-center gap-3"
+              >
+                <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Previous</p>
+                  <p className="font-medium">{prevStudy.title}</p>
                 </div>
-              ))}
-            </div>
+              </Link>
+            ) : (
+              <div />
+            )}
+            {nextStudy ? (
+              <Link
+                href={`/case-studies/${nextStudy.id}`}
+                className="group flex items-center gap-3 text-right"
+              >
+                <div>
+                  <p className="text-sm text-muted-foreground">Next</p>
+                  <p className="font-medium">{nextStudy.title}</p>
+                </div>
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            ) : (
+              <div />
+            )}
           </div>
-        </section>
-
-        {/* Project Details */}
-        <section className="py-20 lg:py-32">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert">
-              <h2>The Challenge</h2>
-              <p>
-                {study.client} came to us with an ambitious vision: create a{" "}
-                {study.industry.toLowerCase()} product that would stand out in a
-                crowded market. They needed a partner who could not only execute
-                on design and development but also bring strategic thinking to
-                the table.
-              </p>
-
-              <h2>Our Approach</h2>
-              <p>
-                We began with a deep discovery phase, interviewing stakeholders,
-                analyzing competitors, and mapping user journeys. This
-                foundation informed every decision that followed.
-              </p>
-              <ul>
-                <li>User research and persona development</li>
-                <li>Competitive analysis and market positioning</li>
-                <li>Technical architecture planning</li>
-                <li>Iterative design with regular feedback loops</li>
-                <li>Agile development with bi-weekly releases</li>
-              </ul>
-
-              <h2>The Solution</h2>
-              <p>
-                We delivered a comprehensive{" "}
-                {study.services.join(", ").toLowerCase()} solution that exceeded
-                initial expectations. The product launched on time and
-                immediately began driving measurable results.
-              </p>
-
-              <h2>Impact</h2>
-              <p>
-                The results speak for themselves. Within six months of launch,{" "}
-                {study.client} saw significant improvements across all key
-                metrics, validating both the strategic direction and execution
-                quality.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Navigation */}
-        <section className="py-16 border-t border-border">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center">
-              {prevStudy ? (
-                <Link
-                  href={`/case-studies/${prevStudy.id}`}
-                  className="group flex items-center gap-3"
-                >
-                  <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Previous</p>
-                    <p className="font-medium">{prevStudy.title}</p>
-                  </div>
-                </Link>
-              ) : (
-                <div />
-              )}
-              {nextStudy ? (
-                <Link
-                  href={`/case-studies/${nextStudy.id}`}
-                  className="group flex items-center gap-3 text-right"
-                >
-                  <div>
-                    <p className="text-sm text-muted-foreground">Next</p>
-                    <p className="font-medium">{nextStudy.title}</p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              ) : (
-                <div />
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </SubPageShell>
   );
 }

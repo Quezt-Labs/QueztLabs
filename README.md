@@ -228,8 +228,8 @@ export const navigation = {
 **Quick Content Updates:**
 
 - **Services**: Edit `services` array in `lib/data.ts`
-- **Case Studies**: Update `caseStudies` array
-- **Blog Posts**: Modify `blogPosts` array
+- **Case Studies**: Add `content/case-studies/*.md` (see `content/README.md`)
+- **Blog Posts**: Add `content/blog/*.md` — RSS at `/feed.xml`
 - **Pricing**: Adjust `pricingTiers` array
 - **FAQs**: Update `faqs` array
 

@@ -29,7 +29,7 @@ export function Hero() {
     <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
       <div className="noise-overlay pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 left-1/2 h-[520px] w-[min(100%,900px)] -translate-x-1/2 rounded-full bg-gradient-to-b from-violet-200/80 via-accent/40 to-transparent blur-3xl" />
+        <div className="absolute -top-32 left-1/2 h-[520px] w-[min(100%,900px)] -translate-x-1/2 rounded-full bg-gradient-to-b from-[oklch(0.92_0.06_295)] via-accent/40 to-transparent blur-3xl" />
         <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-sky-100/70 blur-3xl" />
       </div>
 
@@ -116,7 +116,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          <div className="glass-card rounded-2xl p-2 shadow-2xl shadow-violet-500/10">
+          <div className="glass-card rounded-2xl p-2 shadow-2xl shadow-[oklch(0.55_0.2_285/0.12)]">
             <div className="rounded-xl border border-border/60 bg-card overflow-hidden">
               <div className="flex items-center gap-2 border-b border-border/60 bg-muted/50 px-4 py-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-400/90" />

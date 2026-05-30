@@ -44,7 +44,7 @@ export function SectionHeader({
             light && "border-white/20 bg-white/10 text-white/90",
           )}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+          <span className="brand-dot" aria-hidden />
           {badge}
         </span>
       ) : null}

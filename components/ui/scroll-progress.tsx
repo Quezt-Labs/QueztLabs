@@ -16,7 +16,7 @@ export function ScrollProgress() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-violet-500 via-primary to-violet-400 origin-left z-[100] pointer-events-none"
+      className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[oklch(0.55_0.2_285)] via-primary to-[oklch(0.75_0.12_295)] origin-left z-[100] pointer-events-none"
       style={{
         scaleX,
         transformOrigin: "0%",

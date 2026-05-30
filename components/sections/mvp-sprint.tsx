@@ -83,7 +83,7 @@ export function MVPSprint() {
               }
               className="rounded-2xl border border-border/70 bg-card p-6 shadow-sm"
             >
-              <span className="inline-flex rounded-lg bg-violet-500/10 px-2.5 py-1 text-sm font-bold text-violet-700">
+              <span className="inline-flex rounded-lg bg-brand-muted px-2.5 py-1 text-sm font-bold text-brand">
                 {week.week}
               </span>
               <h3 className="mt-4 text-lg font-semibold">{week.title}</h3>
@@ -96,7 +96,7 @@ export function MVPSprint() {
                     key={item}
                     className="flex items-start gap-2 text-sm text-muted-foreground"
                   >
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet-600" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                     {item}
                   </li>
                 ))}

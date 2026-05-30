@@ -41,35 +41,38 @@ export const company = {
 // ─────────────────────────────────────────────────────────────────────────────
 export const navigation = {
   main: [
-    { name: "Services", href: "#services" },
-    { name: "Stack", href: "#tech-stack" },
-    { name: "Work", href: "#portfolio" },
-    { name: "Process", href: "#process" },
-    { name: "Support", href: "#support" },
+    { name: "Services", href: "/#services" },
+    { name: "Work", href: "/work" },
+    { name: "Blog", href: "/blog" },
+    { name: "Tools", href: "/tools" },
+    { name: "Case Studies", href: "/case-studies" },
   ],
   footer: [
     {
       title: "Services",
       links: [
-        { name: "View All Services", href: "#services" },
-        { name: "30-Day MVP Sprint", href: "#mvp-sprint" },
+        { name: "View All Services", href: "/#services" },
+        { name: "30-Day MVP Sprint", href: "/#mvp-sprint" },
       ],
     },
     {
       title: "Company",
       links: [
-        { name: "About", href: "#about" },
-        { name: "Portfolio", href: "/work" },
-        { name: "Why QueztLabs", href: "#why-queztlabs" },
-        { name: "Process", href: "#process" },
-        { name: "Contact", href: "#contact" },
+        { name: "About", href: "/#about" },
+        { name: "Live Portfolio", href: "/work" },
+        { name: "Why QueztLabs", href: "/#why-queztlabs" },
+        { name: "Process", href: "/#process" },
+        { name: "Contact", href: "/#contact" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { name: "FAQ", href: "#faq" },
-        { name: "Support", href: "#support" },
+        { name: "Blog", href: "/blog" },
+        { name: "Case Studies", href: "/case-studies" },
+        { name: "Tools & Extensions", href: "/tools" },
+        { name: "Resource Hub", href: "/resources" },
+        { name: "FAQ", href: "/#faq" },
         { name: "Book Strategy Call", href: "/#contact" },
       ],
     },
@@ -224,91 +227,8 @@ export const services = [
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PORTFOLIO / CASE STUDIES
-// ─────────────────────────────────────────────────────────────────────────────
-export const caseStudies = [
-  {
-    id: "fintech-mobile-app",
-    title: "FinFlow",
-    subtitle: "Mobile Banking Reimagined",
-    description:
-      "A next-generation mobile banking app with real-time analytics, AI-powered insights, and seamless transactions.",
-    longDescription:
-      "FinFlow is a comprehensive mobile banking solution designed for the modern user. We built a secure, intuitive platform that handles millions of transactions daily while providing personalized financial insights.",
-    client: "FinTech Innovations Inc.",
-    industry: "Finance",
-    services: ["Mobile App", "UI/UX Design", "Backend Development"],
-    metrics: [
-      { label: "App Downloads", value: "2M+" },
-      { label: "User Rating", value: "4.9★" },
-      { label: "Daily Transactions", value: "500K+" },
-    ],
-    image: "/mobile-banking-app-interface-dark-mode.jpg",
-    color: "#2563eb",
-    featured: true,
-  },
-  {
-    id: "ecommerce-platform",
-    title: "Artisan Market",
-    subtitle: "Connecting Creators & Collectors",
-    description:
-      "A premium marketplace platform for artisan goods with advanced search, AR previews, and secure payments.",
-    longDescription:
-      "Artisan Market connects skilled craftspeople with appreciative collectors worldwide. Features include 3D product previews, AI-powered recommendations, and a streamlined checkout experience.",
-    client: "Artisan Collective",
-    industry: "E-commerce",
-    services: ["Web Development", "Mobile App", "UI/UX Design"],
-    metrics: [
-      { label: "Monthly GMV", value: "$5M+" },
-      { label: "Active Sellers", value: "10K+" },
-      { label: "Conversion Rate", value: "4.2%" },
-    ],
-    image: "/ecommerce-marketplace-platform-minimal-design.jpg",
-    color: "#059669",
-    featured: true,
-  },
-  {
-    id: "health-wellness-app",
-    title: "VitalSync",
-    subtitle: "Your Health Companion",
-    description:
-      "A comprehensive health and wellness app with wearable integration, personalized plans, and telehealth features.",
-    longDescription:
-      "VitalSync brings together fitness tracking, nutrition planning, mental wellness, and telehealth consultations in one elegant app. Deep integration with wearables provides real-time health insights.",
-    client: "HealthTech Solutions",
-    industry: "Healthcare",
-    services: ["Mobile App", "Backend Development", "Integrations"],
-    metrics: [
-      { label: "Active Users", value: "500K+" },
-      { label: "Health Goals Met", value: "89%" },
-      { label: "Telehealth Sessions", value: "100K+" },
-    ],
-    image: "/health-wellness-app-fitness-tracking-clean-interfa.jpg",
-    color: "#dc2626",
-    featured: true,
-  },
-  {
-    id: "saas-dashboard",
-    title: "DataPulse",
-    subtitle: "Analytics Made Simple",
-    description:
-      "An enterprise analytics dashboard with real-time data visualization, custom reports, and team collaboration.",
-    longDescription:
-      "DataPulse transforms complex data into actionable insights. We built a powerful yet intuitive analytics platform that helps teams make data-driven decisions faster.",
-    client: "Enterprise Analytics Co.",
-    industry: "SaaS",
-    services: ["Web Development", "UI/UX Design", "Data Engineering"],
-    metrics: [
-      { label: "Enterprise Clients", value: "200+" },
-      { label: "Data Points Processed", value: "1B+/day" },
-      { label: "Time Saved", value: "40%" },
-    ],
-    image: "/analytics-dashboard-data-visualization-dark-theme.jpg",
-    color: "#7c3aed",
-    featured: false,
-  },
-];
+// Case studies → content/case-studies/*.md (see lib/case-studies.ts)
+// Blog posts → content/blog/*.md (see lib/blog.ts)
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PROCESS STEPS
@@ -474,154 +394,6 @@ export const faqs = [
     question: "Do you work with non-technical founders?",
     answer:
       "Absolutely. Most of our clients are non-technical founders. We explain technical decisions in plain English, provide clear documentation, and make sure you understand what you're getting. You don't need to code to work with us.",
-  },
-];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// BLOG POSTS
-// ─────────────────────────────────────────────────────────────────────────────
-export const blogPosts = [
-  {
-    id: "building-scalable-react-native-apps",
-    title: "Building Scalable React Native Apps: Lessons from the Trenches",
-    excerpt:
-      "After shipping dozens of React Native apps, here are the architectural patterns and practices that consistently lead to success.",
-    content: `
-# Building Scalable React Native Apps: Lessons from the Trenches
-
-After years of building React Native applications for clients across industries, we've learned what separates apps that scale gracefully from those that become maintenance nightmares.
-
-## Start with a Solid Architecture
-
-The foundation of any scalable app is its architecture. We recommend a feature-based folder structure that groups related components, hooks, and utilities together.
-
-\`\`\`
-src/
-├── features/
-│   ├── auth/
-│   ├── dashboard/
-│   └── settings/
-├── shared/
-│   ├── components/
-│   ├── hooks/
-│   └── utils/
-└── navigation/
-\`\`\`
-
-## State Management Done Right
-
-Don't reach for Redux by default. For many apps, a combination of React Context, React Query, and Zustand provides a simpler, more performant solution.
-
-## Performance from Day One
-
-- Use FlatList for long lists, never ScrollView
-- Implement proper image caching
-- Profile early and often with Flipper
-- Consider Hermes for Android
-
-## The Testing Pyramid
-
-We follow a testing strategy that emphasizes:
-1. Unit tests for business logic
-2. Integration tests for features
-3. E2E tests for critical user flows
-
-## Conclusion
-
-Building scalable React Native apps isn't magic—it's about making good decisions consistently. Start with these foundations, and you'll be well on your way.
-    `,
-    author: "Alex Rivera",
-    authorRole: "Lead Mobile Engineer",
-    authorAvatar: "/software-engineer-headshot.png",
-    date: "2024-01-15",
-    readTime: "8 min read",
-    category: "Engineering",
-    image: "/react-native-mobile-development-code.jpg",
-    featured: true,
-  },
-  {
-    id: "design-systems-worth-building",
-    title: "Design Systems Worth Building: A Practical Guide",
-    excerpt:
-      "How to create a design system that actually gets used, without over-engineering or under-delivering.",
-    content: `
-# Design Systems Worth Building: A Practical Guide
-
-A design system is only valuable if people use it. Here's how we approach building systems that teams actually adopt.
-
-## Start Small, Think Big
-
-Don't try to systematize everything at once. Start with the components you use most: buttons, inputs, cards, typography.
-
-## Document as You Go
-
-Every component should have:
-- Usage guidelines
-- Code examples
-- Accessibility notes
-- Do's and don'ts
-
-## Make Adoption Easy
-
-The easier it is to use your system, the more it will be used. Provide:
-- Copy-paste code snippets
-- Figma components that match code 1:1
-- Clear upgrade paths
-
-## Conclusion
-
-The best design system is one that grows with your product. Start simple, iterate based on real usage, and always prioritize developer and designer experience.
-    `,
-    author: "Jordan Kim",
-    authorRole: "Design Director",
-    authorAvatar: "/professional-designer-headshot.png",
-    date: "2024-01-08",
-    readTime: "6 min read",
-    category: "Design",
-    image: "/design-system-ui-kit.png",
-    featured: true,
-  },
-  {
-    id: "nextjs-performance-optimization",
-    title: "Next.js Performance: From Good to Great",
-    excerpt:
-      "Practical techniques to squeeze every bit of performance out of your Next.js application.",
-    content: `
-# Next.js Performance: From Good to Great
-
-Next.js gives you great performance out of the box, but there's always room for optimization. Here's how we take apps from good to great.
-
-## Image Optimization
-
-Always use next/image. It handles:
-- Lazy loading
-- Responsive sizing
-- WebP conversion
-- Blur placeholders
-
-## Code Splitting
-
-Next.js splits code automatically, but you can help:
-- Use dynamic imports for heavy components
-- Lazy load below-the-fold content
-- Consider route-based code splitting
-
-## Caching Strategies
-
-Leverage ISR (Incremental Static Regeneration) for pages that change infrequently. Use SWR for client-side data fetching with stale-while-revalidate patterns.
-
-## Conclusion
-
-Performance optimization is an ongoing process. Measure, optimize, and measure again.
-    `,
-    author: "Sam Taylor",
-    authorRole: "Senior Engineer",
-    authorAvatar: "/developer-headshot.png",
-    date: "2024-01-01",
-    readTime: "7 min read",
-    category: "Engineering",
-    image: "/nextjs-performance-lighthouse-metrics.jpg",
-    featured: false,
   },
 ];
 

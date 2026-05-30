@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { services, calBookingUrl } from "@/lib/data";
+import { ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
+import { SubPageShell } from "@/components/layout/sub-page-shell";
+import { Button } from "@/components/ui/button";
+import { SectionShell } from "@/components/ui/section-shell";
+import { services, calBookingUrl } from "@/lib/data";
+import { JsonLdScripts } from "@/components/seo/json-ld";
+import { absoluteUrl, breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -17,18 +19,12 @@ const categoryLabels: Record<string, string> = {
   product: "Product",
 };
 
-/**
- * Generate static params for all services
- */
 export async function generateStaticParams() {
   return services.map((service) => ({
     slug: service.slug,
   }));
 }
 
-/**
- * Generate dynamic metadata for each service
- */
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
@@ -36,24 +32,17 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === slug);
 
   if (!service) {
-    return {
-      title: "Service Not Found",
-    };
+    return { title: "Service Not Found" };
   }
 
-  return {
+  return pageMetadata({
     title: service.title,
     description: service.description,
-    openGraph: {
-      title: `${service.title} | Quezt Labs`,
-      description: service.description,
-    },
-  };
+    path: `/service/${service.slug}`,
+    keywords: [service.title, service.category, "Quezt Labs services"],
+  });
 }
 
-/**
- * Service detail page - PW LeapX style
- */
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
@@ -62,129 +51,119 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: service.title,
-    description: service.description,
-    provider: {
-      "@type": "Organization",
-      name: "Quezt Labs",
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: service.title,
+      description: service.description,
+      url: absoluteUrl(`/service/${service.slug}`),
+      provider: { "@id": "https://queztlabs.tech/#organization" },
+      areaServed: "IN",
     },
-  };
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/#services" },
+      { name: service.title, path: `/service/${service.slug}` },
+    ]),
+  ];
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <Header />
-      <main className="pt-20">
-        {/* Hero */}
-        <section className="py-12 lg:py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-              <Link
-                href="/"
-                className="hover:text-foreground transition-colors"
-              >
-                Home
-              </Link>
-              <span>/</span>
-              <Link
-                href="/#services"
-                className="hover:text-foreground transition-colors"
-              >
-                Services
-              </Link>
-              <span>/</span>
-              <span className="text-foreground">{service.title}</span>
-            </nav>
+    <SubPageShell backHref="/#services" backLabel="All services">
+      <JsonLdScripts schemas={schemas} />
 
-            <div className="max-w-3xl">
-              <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-accent/30 text-foreground mb-4">
-                {categoryLabels[service.category] || service.category}
-              </span>
-              <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
-                {service.title}
-              </h1>
-              <p className="mt-4 text-xl text-muted-foreground leading-relaxed">
-                {service.description}
-              </p>
+      <section className="py-12 lg:py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">
+              Home
+            </Link>
+            <span>/</span>
+            <Link href="/#services" className="hover:text-foreground">
+              Services
+            </Link>
+            <span>/</span>
+            <span className="text-foreground">{service.title}</span>
+          </nav>
 
-              <Button className="mt-8" asChild>
+          <div className="max-w-3xl">
+            <span className="badge-pill mb-4 inline-block">
+              {categoryLabels[service.category] || service.category}
+            </span>
+            <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
+              {service.title}
+            </h1>
+            <p className="mt-4 text-xl leading-relaxed text-muted-foreground">
+              {service.description}
+            </p>
+
+            {service.features?.length ? (
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {service.features.map((f) => (
+                  <li
+                    key={f}
+                    className="rounded-md bg-muted px-2.5 py-1 text-sm text-muted-foreground"
+                  >
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            <Button className="mt-8" asChild>
+              <a href={calBookingUrl} target="_blank" rel="noopener noreferrer">
+                Book strategy call
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <SectionShell variant="muted" className="!py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h2 className="mb-6 text-2xl font-bold">What we deliver</h2>
+            <ul className="space-y-4">
+              {service.deliverables.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-muted-foreground"
+                >
+                  <span className="brand-dot mt-2 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </SectionShell>
+
+      <section className="py-20 lg:py-28">
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-4 text-2xl font-bold">Ready to get started?</h2>
+            <p className="mb-8 text-muted-foreground">
+              Let&apos;s discuss how {service.title} fits your roadmap.
+            </p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <Button size="lg" asChild>
                 <a
                   href={calBookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Book Strategy Call
+                  Book strategy call
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="/#contact">Contact us</Link>
+              </Button>
             </div>
           </div>
-        </section>
-
-        {/* What We Deliver */}
-        <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-bold mb-6">What We Deliver</h2>
-              <p className="text-muted-foreground mb-8">
-                Comprehensive features designed to accelerate your
-                startup&apos;s growth
-              </p>
-              <ul className="space-y-4">
-                {service.deliverables.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-muted-foreground"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Ready to Get Started */}
-        <section className="py-20 lg:py-32">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
-              <p className="text-muted-foreground mb-8">
-                Let&apos;s discuss how {service.title} can accelerate your
-                startup&apos;s growth. Schedule a free consultation with our
-                experts.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
-                  <a
-                    href={calBookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Book Strategy Call
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/#services">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Services
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </SubPageShell>
   );
 }

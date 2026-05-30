@@ -1,17 +1,13 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
-import { blogPosts } from "@/lib/data";
+import { getBlogPostSummaries } from "@/lib/blog";
 
-/**
- * Blog teaser section showing recent posts
- */
 export function BlogTeaser() {
-  const featuredPosts = blogPosts.filter((post) => post.featured).slice(0, 2);
+  const featuredPosts = getBlogPostSummaries()
+    .filter((post) => post.featured)
+    .slice(0, 2);
 
   return (
     <section id="blog" className="py-20 lg:py-32">
@@ -22,17 +18,11 @@ export function BlogTeaser() {
           description="Thoughts on technology, design, and building great products."
         />
 
-        <div className="mt-16 grid md:grid-cols-2 gap-8">
-          {featuredPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Link href={`/blog/${post.id}`} className="group block">
-                <div className="relative aspect-[2/1] rounded-2xl overflow-hidden bg-muted mb-4">
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
+          {featuredPosts.map((post) => (
+            <article key={post.slug}>
+              <Link href={`/blog/${post.slug}`} className="group block">
+                <div className="relative mb-4 aspect-[2/1] overflow-hidden rounded-2xl bg-muted">
                   <Image
                     src={post.image || "/placeholder.svg"}
                     alt={post.title}
@@ -40,7 +30,7 @@ export function BlogTeaser() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
+                <div className="mb-2 flex items-center gap-3 text-sm text-muted-foreground">
                   <span>{post.category}</span>
                   <span>•</span>
                   <span>{post.readTime}</span>
@@ -48,28 +38,23 @@ export function BlogTeaser() {
                 <h3 className="text-xl font-semibold group-hover:underline underline-offset-4">
                   {post.title}
                 </h3>
-                <p className="mt-2 text-muted-foreground text-sm leading-relaxed">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {post.excerpt}
                 </p>
               </Link>
-            </motion.article>
+            </article>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-sm font-medium hover:underline underline-offset-4"
           >
             View all articles
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
