@@ -188,13 +188,12 @@ html {
   }
 }
 
+/* Transform-only — opacity must stay 1 so Lighthouse can measure LCP */
 @keyframes fade-up {
   from {
-    opacity: 0;
-    transform: translate3d(0, 1rem, 0);
+    transform: translate3d(0, 0.5rem, 0);
   }
   to {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -206,7 +205,6 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up {
     animation: none;
-    opacity: 1;
     transform: none;
   }
 }

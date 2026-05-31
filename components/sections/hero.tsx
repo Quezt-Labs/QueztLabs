@@ -29,7 +29,7 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="animate-fade-up mt-6 text-4xl font-bold leading-[1.08] tracking-[-0.03em] [animation-delay:50ms] sm:text-5xl lg:text-6xl xl:text-[3.5rem]">
+          <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-6xl xl:text-[3.5rem]">
             We design &amp; ship{" "}
             <span className="gradient-text font-serif italic font-normal">
               products
