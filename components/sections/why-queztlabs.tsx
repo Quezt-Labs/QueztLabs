@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Code2, Rocket, Users, Shield } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionShell } from "@/components/ui/section-shell";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import type { LucideIcon } from "lucide-react";
 
 const differentiators: {
@@ -43,11 +39,7 @@ const differentiators: {
   },
 ];
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 export function WhyQueztLabs() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <SectionShell id="why-queztlabs">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,30 +52,18 @@ export function WhyQueztLabs() {
         />
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2">
-          {differentiators.map((item, index) => {
+          {differentiators.map((item) => {
             const Icon = item.icon;
             return (
-              <motion.article
+              <article
                 key={item.num}
-                initial={
-                  shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
-                }
-                whileInView={
-                  shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
-                }
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.06,
-                  ease: EASE,
-                }}
                 className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-shadow hover:shadow-md lg:p-8"
               >
                 <span className="text-5xl font-bold tracking-tighter text-muted/80">
                   {item.num}
                 </span>
                 <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-muted">
-                  <Icon className="h-5 w-5 text-brand" />
+                  <Icon className="h-5 w-5 text-brand" aria-hidden />
                 </div>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight">
                   {item.title}
@@ -91,7 +71,7 @@ export function WhyQueztLabs() {
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
-              </motion.article>
+              </article>
             );
           })}
         </div>

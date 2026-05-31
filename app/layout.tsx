@@ -1,26 +1,17 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { GoogleTagManager } from "@/components/analytics/gtm";
-import Script from "next/script";
-import "lenis/dist/lenis.css";
+import { DeferredThirdParty } from "@/components/analytics/deferred-third-party";
 import "./globals.css";
 import { Providers } from "./providers";
 
-/**
- * Font Configuration
- * - Inter: Clean, modern sans-serif for body text and UI
- * - Playfair Display: Elegant serif for headings and emphasis
- * - Geist Mono: Monospace for code snippets
- */
-// Optimize font loading - use 'swap' for better LCP, fallback to system fonts
-// 'swap' shows text immediately with fallback, then swaps when font loads
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap", // Better for LCP - shows text immediately
+  display: "swap",
   preload: true,
+  weight: ["400", "600"],
   fallback: [
     "system-ui",
     "-apple-system",
@@ -29,33 +20,8 @@ const inter = Inter({
     "sans-serif",
   ],
   adjustFontFallback: true,
-  // Only load regular weight initially to reduce font file size
-  weight: ["400", "500", "600", "700"],
 });
 
-// Defer non-critical fonts - load after initial render
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "optional", // Don't block render
-  preload: false,
-  fallback: ["Georgia", "Times New Roman", "serif"],
-  adjustFontFallback: true,
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "optional",
-  preload: false,
-  fallback: ["Menlo", "Monaco", "Courier New", "monospace"],
-  adjustFontFallback: true,
-});
-
-/**
- * SEO Metadata Configuration
- * Update these values to match your brand
- */
 export const metadata: Metadata = {
   metadataBase: new URL("https://queztlabs.tech"),
   title: {
@@ -98,11 +64,11 @@ export const metadata: Metadata = {
       "Founder-led product engineering. We build production-ready web apps, mobile apps, and MVPs for startups. Next.js, React Native, Flutter—plus branding and GTM. Delhi, India.",
     images: [
       {
-        url: "https://queztlabs.tech/logo.png",
-        width: 1200,
-        height: 630,
+        url: "https://queztlabs.tech/og-image.jpg",
+        width: 512,
+        height: 512,
         alt: "Quezt Labs - MVP Development, Web Apps & Growth Solutions",
-        type: "image/png",
+        type: "image/jpeg",
       },
     ],
   },
@@ -111,14 +77,7 @@ export const metadata: Metadata = {
     title: "Quezt Labs | MVP Development, Web Apps & Growth Solutions",
     description:
       "Founder-led product engineering. Web apps, mobile apps, MVPs—plus branding and GTM. Delhi, India.",
-    images: [
-      {
-        url: "https://queztlabs.tech/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Quezt Labs - MVP Development, Web Apps & Growth Solutions",
-      },
-    ],
+    images: ["https://queztlabs.tech/og-image.jpg"],
     creator: "@queztlabs",
   },
   robots: {
@@ -134,13 +93,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo.png", sizes: "any" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
   },
   manifest: "/manifest.json",
   generator: "quezt-labs",
@@ -158,46 +115,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}
-      suppressHydrationWarning
-    >
-      <head>
-        {/* Preconnect to Google Fonts - must be in head for proper detection */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* DNS prefetch for analytics */}
-        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        {/* Critical CSS inline to prevent render-blocking */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              /* Critical above-the-fold styles */
-              body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-              h1 { font-weight: 700; line-height: 1.2; margin: 0; }
-              .container { width: 100%; margin: 0 auto; padding: 0 1rem; }
-              .text-center { text-align: center; }
-              .flex { display: flex; }
-              .items-center { align-items: center; }
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased bg-background text-foreground">
-        <GoogleTagManager />
         <Providers>{children}</Providers>
         <Analytics />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3410281475975918"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        <DeferredThirdParty />
       </body>
     </html>
   );

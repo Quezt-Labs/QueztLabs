@@ -1,8 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface SectionHeaderProps {
   badge?: string;
@@ -13,8 +9,6 @@ interface SectionHeaderProps {
   light?: boolean;
 }
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 export function SectionHeader({
   badge,
   title,
@@ -23,16 +17,10 @@ export function SectionHeader({
   className,
   light = false,
 }: SectionHeaderProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.55, ease: EASE }}
+    <div
       className={cn(
-        "max-w-3xl",
+        "max-w-3xl animate-fade-up",
         align === "center" ? "mx-auto text-center" : "text-left",
         className,
       )}
@@ -50,7 +38,7 @@ export function SectionHeader({
       ) : null}
       <h2
         className={cn(
-          "text-3xl font-bold tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1] text-balance",
+          "text-3xl font-bold tracking-[-0.03em] text-balance sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]",
           light && "text-white",
         )}
       >
@@ -66,6 +54,6 @@ export function SectionHeader({
           {description}
         </p>
       ) : null}
-    </motion.div>
+    </div>
   );
 }

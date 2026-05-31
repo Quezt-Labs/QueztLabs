@@ -41,8 +41,10 @@ export default function SiteHeader() {
             alt={`${company.name} logo`}
             width={36}
             height={36}
+            sizes="36px"
             className="h-9 w-9"
             priority
+            fetchPriority="high"
           />
           <span className="font-semibold tracking-tight">{company.name}</span>
         </Link>

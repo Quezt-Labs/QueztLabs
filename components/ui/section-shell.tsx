@@ -24,7 +24,7 @@ export function SectionShell({
     <section
       id={id}
       className={cn(
-        "relative py-24 lg:py-32 overflow-hidden",
+        "section-below-fold relative py-24 lg:py-32 overflow-hidden",
         variants[variant],
         className,
       )}

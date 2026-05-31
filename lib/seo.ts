@@ -29,7 +29,7 @@ export function pageMetadata({
   description,
   path,
   keywords,
-  ogImage = "/logo.png",
+  ogImage = "/og-image.jpg",
   noIndex = false,
   type = "website",
 }: {
@@ -78,6 +78,7 @@ export function organizationSchema() {
     name: company.name,
     url: SITE_URL,
     logo: absoluteUrl("/logo.png"),
+    image: absoluteUrl("/og-image.jpg"),
     description: company.tagline,
     email: company.email,
     areaServed: {
@@ -145,7 +146,7 @@ export function blogPostingSchema(post: {
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     keywords: post.tags.join(", "),
     inLanguage: "en-IN",
-    image: absoluteUrl("/logo.png"),
+    image: absoluteUrl("/og-image.jpg"),
   };
 }
 

@@ -1,12 +1,18 @@
 import SiteHeader from "@/components/layout/site-header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
-import { WhyQueztLabs } from "@/components/sections/why-queztlabs";
 import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/json-ld";
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { BackToTop } from "@/components/ui/back-to-top";
 import { SkipToContent } from "@/components/layout/skip-to-content";
+import { HomeExtras } from "@/components/home-extras";
+
+const WhyQueztLabs = dynamic(
+  () =>
+    import("@/components/sections/why-queztlabs").then((m) => ({
+      default: m.WhyQueztLabs,
+    })),
+  { loading: () => <div className="py-20 lg:py-32" /> },
+);
 
 // Lazy load below-the-fold components for better performance
 const Services = dynamic(
@@ -149,7 +155,7 @@ export default function HomePage() {
     <>
       <SkipToContent />
       <JsonLd />
-      <ScrollProgress />
+      <HomeExtras />
       <SiteHeader />
       <main id="main-content">
         <Hero />
@@ -168,7 +174,6 @@ export default function HomePage() {
         <Contact />
       </main>
       <Footer />
-      <BackToTop />
     </>
   );
 }
